@@ -1,0 +1,15 @@
+<!-- templates/event_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+</head>
+<body>
+    <h2>{{ event[2] }}</h2>
+    <p>{{ event[3] }}</p>
+    <p>{{ event[4] }}</p>
+    <a href="{{ url_for('get_all_events') }}">Back to All Events</a>
+</body>
+</html>
