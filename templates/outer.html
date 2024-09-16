@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Conditional Template Example</title>
+</head>
+<body>
+    <h1>Outer Template</h1>
+
+    <p>This is the outer content.</p>
+
+    {% if x %}
+        {% include 'inner_a.html' %}
+    {% else %}
+        {% include 'inner_b.html' %}
+    {% endif %}
+
+</body>
+</html>

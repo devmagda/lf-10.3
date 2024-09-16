@@ -5,16 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
     <h2>Register</h2>
-    <form action="/register" method="POST">
+    <form action="/register" method="POST" onsubmit="return validatePassword()">
         <label for="username">Username:</label><br>
         <input type="text" id="username" name="username" required><br><br>
+
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password" required><br><br>
-        <label for="password">Role_ID:</label><br>
-        <input type="text" id="role_id" name="role_id" required><br><br>
+
+        <label for="confirm_password">Confirm Password:</label><br>
+        <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+
+        <label for="role_id">Role:</label><br>
+        <select id="role_id" name="role_id" required>
+            <option value="1">User</option>
+            <option value="2">Admin</option>
+            <option value="3">Creator</option>
+        </select><br><br>
+
         <button type="submit">Register</button>
     </form>
 
