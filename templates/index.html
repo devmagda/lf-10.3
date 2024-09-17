@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Example</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}">
 </head>
 <body>
     <h1>Current View: {{ view }}</h1>
@@ -11,9 +12,6 @@
     {% include 'index_toolbar_buttons.html' %}
     {% include 'index_container.html' %}
     {% include 'index_sidebar.html' %}
-
-
-    <!-- List of buttons to change the view -->
 
 </body>
 </html>

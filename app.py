@@ -1,6 +1,8 @@
 from enum import Enum
 
 import psycopg2
+import sass
+import os
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user, UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -11,6 +13,25 @@ app.config['SECRET_KEY'] = 'your_secret_key'
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+
+# Define the paths for SCSS and CSS files
+scss_file = 'static/scss/styles.scss'
+css_file = 'static/css/styles.css'
+
+
+def compile_scss():
+    try:
+        # Compile SCSS to CSS
+        css = sass.compile(filename=scss_file)
+
+        # Write the compiled CSS to a file
+        with open(css_file, 'w') as file:
+            file.write(css)
+
+        print('SCSS compiled to CSS successfully.')
+    except Exception as e:
+        print(f'Error compiling SCSS: {e}')
 
 
 class Event:
@@ -413,11 +434,6 @@ def get_event(event_id):
 @app.route('/event-list', methods=['GET'])
 def get_event_list():
     return render_template('event_list.html')
-
-
-@app.route('/event/<string:event_name>', methods=['GET'])
-def get_event_detail(event_name):
-    return render_template('single-event.html', event_name=event_name)
 
 
 @app.route('/team', methods=['GET'])

@@ -9,15 +9,6 @@
     </form>
     {% endif %}
 
-    {% if role == 0 %} <!-- Guest role -->
-    <form action="{{ url_for('set_view', view_name='login') }}" method="POST">
-        <button type="submit">Login</button>
-    </form>
-    <form action="{{ url_for('set_view', view_name='register') }}" method="POST">
-        <button type="submit">Register</button>
-    </form>
-    {% endif %}
-
     <!-- Common buttons for all users -->
     <form action="{{ url_for('set_view', view_name='terms-and-conditions') }}" method="POST">
         <button type="submit">Terms and Conditions</button>
@@ -28,6 +19,15 @@
     <form action="{{ url_for('set_view', view_name='team') }}" method="POST">
         <button type="submit">Team</button>
     </form>
+
+    {% if role == 0 %} <!-- Guest role -->
+    <form action="{{ url_for('set_view', view_name='login') }}" method="POST">
+        <button type="submit">Login</button>
+    </form>
+    <form action="{{ url_for('set_view', view_name='register') }}" method="POST">
+        <button type="submit">Register</button>
+    </form>
+    {% endif %}
 
     <!-- Logout button, visible to all users except guests -->
     {% if role != 0 %}
