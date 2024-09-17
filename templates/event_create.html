@@ -1,12 +1,4 @@
-<!-- templates/create_event.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Event</title>
-</head>
-<body>
+<div class="container container-event event-create">
     <h2>Create New Event</h2>
     <form action="/events/create" method="POST">
         <label for="title_short">Short Title:</label><br>
@@ -17,5 +9,4 @@
         <textarea id="description" name="description" required></textarea><br><br>
         <button type="submit">Create Event</button>
     </form>
-</body>
-</html>
+</div>

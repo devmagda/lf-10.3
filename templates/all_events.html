@@ -1,9 +1,0 @@
-
-    <h2>All Events</h2>
-    <ul>
-        {% for event in events %}
-            <li>
-                <a href="{{ url_for('get_event', event_id=event[0]) }}">{{ event[2] }}</a>
-            </li>
-        {% endfor %}
-    </ul>

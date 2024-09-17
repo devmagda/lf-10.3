@@ -1,0 +1,24 @@
+<div class="container">
+    {% if view == 'HOME' %}
+        {% include 'index_container_home.html' %}
+    {% elif view == 'EVENT_CREATE' %}
+        {% include 'event_create.html' %}
+    {% elif view == 'EVENT_ALL' %}
+        {% include 'all-events.html' %}
+    {% elif view == 'EVENT_SINGLE' %}
+        {% include 'single-event.html' %}
+    {% elif view == 'LOGIN' %}
+        {% include 'index_container_login.html' %}
+    {% elif view == 'REGISTER' %}
+        {% include 'index_container_register.html' %}
+    {% elif view == 'TERMS' %}
+        {% include 'index_container_tos.html' %}
+    {% elif view == 'IMPRINT' %}
+        {% include 'index_container_imprint.html' %}
+    {% elif view == 'TEAM' %}
+        {% include 'index_container_team.html' %}
+    {% else %}
+        <!-- Default content or placeholder -->
+        <p>Select a view from the toolbar.</p>
+    {% endif %}
+</div>
