@@ -1,0 +1,12 @@
+<div class="container container-event container-event-single editorContainer">
+    <div class="form">
+        <div class="formItems">
+            <div class="eventTitle">{{ focused_event.title }}</div>
+            <div class="ownerID">Owner: {{ focused_event.owner_username }}</div>
+            <div class="eventDescription fontThin">{{ focused_event.description }}</div>
+            <div class="event-subscriptions">
+                Subscriptions: {{ focused_event.get_subscriptions() if focused_event.subscriptions else 'No subscriptions' }}
+            </div>
+        </div>
+    </div>
+</div>

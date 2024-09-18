@@ -1,0 +1,51 @@
+<!-- index_toolbar_buttons.html -->
+<div class="toolbar toolbar-buttons mainContainer">
+    {% if role == 3 or role == 2 %} <!-- Admin and Creator roles -->
+    <nav class="navigation">
+        <div class="navUl">
+            <img src="a-logo-for-a-website-that-tidies-the-enviroment.svg" class="logoNavigation">
+            <form action="{{ url_for('set_view', view_name='home') }}" method="POST" class="navLi">
+                <button type="submit" class="navItem">Home</button>
+            </form>
+            <form action="{{ url_for('set_view', view_name='event-create') }}" method="POST" class="navLi">
+                <button type="submit" class="navItem">Create Event</button>
+            </form>
+            {% endif %}
+
+            <!-- Logout button, visible to all users except guests -->
+            {% if role != 0 %}
+            <form action="{{ url_for('logout') }}" method="POST" class="navLi">
+                <button type="submit" class="navItem navButton">Logout</button>
+            </form>
+            {% endif %}
+
+            {% if role == 0 %} <!-- Guest role -->
+            <form action="{{ url_for('set_view', view_name='login') }}" method="POST" class="navLi">
+                <button type="submit" class="navItem navButton">Login</button>
+            </form>
+            <form action="{{ url_for('set_view', view_name='register') }}" method="POST" class="navLi">
+                <button type="submit" class="navButton">Register</button>
+            </form>
+            {% endif %}
+
+
+        </div>
+    </nav>
+
+
+</div>
+
+
+<div class="toolbar toolbar-buttons">
+
+    <!-- Common buttons for all users -->
+    <form action="{{ url_for('set_view', view_name='terms-and-conditions') }}" method="POST">
+        <button type="submit">Terms and Conditions</button>
+    </form>
+    <form action="{{ url_for('set_view', view_name='imprint') }}" method="POST">
+        <button type="submit">Imprint</button>
+    </form>
+    <form action="{{ url_for('set_view', view_name='team') }}" method="POST">
+        <button type="submit">Team</button>
+    </form>
+</div>

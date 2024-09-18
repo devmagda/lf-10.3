@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream:templates/login.html
 <!-- templates/login.html -->
 <!DOCTYPE html>
 <html lang="en">
@@ -19,3 +20,25 @@
     <p>Don't have an account? <a href="/register">Register here</a></p>
 </body>
 </html>
+=======
+<!-- index_container_login.html -->
+<div class="container container-login">
+
+    <h1 class="loginHeadline">Login</h1>
+
+    <div class="loginContainer">
+        <form action="/login" method="POST" class="loginForm">
+            <label for="username" class="lable">Username:</label>
+            <input type="text" id="username" name="username" class="input" required>
+            <label for="password" class="lable">Password:</label>
+            <input type="password" id="password" name="password" class="input" required>
+
+            <div class="submitButtonContainer">
+                <input type="submit" value="Submit" class="submitButton">
+                <button type="submit" class="submitButton">Login</button>
+            </div>
+        </form>
+    </div>
+    <p>Don't have an account? <a href="/view/register">Register here</a></p>
+</div>
+>>>>>>> Stashed changes:templates/index_container_login.html

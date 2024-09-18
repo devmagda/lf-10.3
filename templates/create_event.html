@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream:templates/create_event.html
 <!-- templates/create_event.html -->
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +17,28 @@
         <label for="description">Description:</label><br>
         <textarea id="description" name="description" required></textarea><br><br>
         <button type="submit">Create Event</button>
+=======
+<div class="container container-event container-event-create">
+    <h1 class="editorHeadline">Create your own Event here!</h1>
+    <div class="editorContainer">
+    <form action="/events/create" method="POST" class="eventForm">
+        <div class="eventFormItems">
+            <label for="title_short" class="lable">Short Title:</label>
+            <input type="text" id="title_short" name="title_short" class="input" required>
+        </div>
+        <div class="eventFormItems">
+            <label for="title" class="lable">Title:</label>
+            <input type="Text" id="title" class="input" name="title">
+        </div>
+
+        <div class="eventFormItems">
+            <label for="description" class="lable">Description:</label>
+            <textarea id="description" class="input" name="description"></textarea>
+        </div>
+        <div class="submitButtonContainer">
+            <input type="submit" value="Submit" class="submitButton">
+        </div>
+>>>>>>> Stashed changes:templates/index_container_event_create.html
     </form>
 </body>
 </html>

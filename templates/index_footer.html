@@ -1,0 +1,29 @@
+<!-- index_footer.html -->
+<div>
+    <!-- Common buttons for all users -->
+    <hr class="footerLine">
+    <footer>
+        <div class="footerContainer">
+            <img src="a-logo-for-a-website-that-tidies-the-enviroment.svg" class="logo">
+            <form action="{{ url_for('set_view', view_name='imprint') }}" method="POST">
+                <button type="submit" class="footerLinks fontThin">Imprint</button>
+            </form>
+            <form action="{{ url_for('set_view', view_name='terms-and-conditions') }}" method="POST">
+                <button type="submit" class="footerLinks fontThin">Terms and Conditions</button>
+            </form>
+
+
+            <form action="{{ url_for('set_view', view_name='team') }}" method="POST">
+                <button type="submit">Team</button>
+            </form>
+
+
+            <a class="footerLinks fontThin">
+                CleaningEvents e.V.<br>
+                <br>
+                Dratelnstraße 26 <br>
+                21109 Hamburg
+            </a>
+        </div>
+    </footer>
+</div>

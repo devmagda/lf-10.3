@@ -1,0 +1,13 @@
+<!--index_sidebar_eventlist.html-->
+<div class="sidebar sidebar-eventlist stickyEventsContainer">
+    {% if event_list %}
+        {% for event in event_list %}
+            <a class="stickyEventsItem stickyEventsHeadline">All Events</a>
+            <form action="{{ url_for('get_event', event_id=event.id) }}" method="POST">
+                <button type="submit" class="stickyEventsItem">{{ event.title_short }}</button>
+            </form>
+        {% endfor %}
+    {% else %}
+        <p>No events available.</p>
+    {% endif %}
+</div>

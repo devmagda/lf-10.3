@@ -1,0 +1,91 @@
+<div class="container">
+    {% if view == 'HOME' %}
+        {% include 'index_container_home.html' %}
+    {% elif view == 'EVENT_CREATE' %}
+        {% include 'index_container_event_create.html' %}
+    {% elif view == 'EVENT_ALL' %}
+        {% include 'all-events.html' %}
+    {% elif view == 'EVENT_SINGLE' %}
+        {% include 'index_container_event_single.html' %}
+    {% elif view == 'LOGIN' %}
+        {% include 'index_container_login.html' %}
+    {% elif view == 'REGISTER' %}
+        {% include 'index_container_register.html' %}
+    {% elif view == 'TERMS' %}
+        {% include 'index_container_tos.html' %}
+    {% elif view == 'IMPRINT' %}
+        {% include 'index_container_imprint.html' %}
+    {% elif view == 'TEAM' %}
+        {% include 'index_container_team.html' %}
+    {% else %}
+        <!-- Default content or placeholder -->
+        <section class="mainContainer">
+            <div class="headerContainer">
+                <div class="firstSectionContainer">
+                    <p class="firstSectionHeadline">
+                        <b>
+                            UNITE FOR A CLEANER FUTURE <br>
+                            TOGETHER, WE MAKE A <a class="highlight">DIFFERENCE</a>
+                        </b>
+                    </p>
+                    <p class="fontThin firstSectionIntro">
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna. <br>
+                        At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est amet.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <hr class="indexLine">
+
+        <div class="cardContainer">
+            <div class="cardBody pink">
+                <svg class="cardIcon" viewBox="0 0 1024 1024">
+                    <g style="fill: white">
+                        <path d="M680.89,649.87L991,556.4c43.99-13.26,43.99-75.55,0-88.81l-310.11-93.46c-14.89-4.49-26.54-16.14-31.02-31.02
+                                    L556.41,33C543.15-11,480.85-11,467.59,33l-93.46,310.11c-4.49,14.89-16.14,26.54-31.02,31.02L33,467.59
+                                    c-43.99,13.26-44,75.55,0,88.81l310.11,93.47c14.89,4.49,26.54,16.14,31.02,31.02L467.59,991c13.26,43.99,75.55,43.99,88.81,0
+                                    l93.46-310.11C654.36,666.01,666,654.36,680.89,649.87z"/>
+                    </g>
+                </svg>
+                <div class="cardBodyText">
+                    <hr class="cardLine">
+                    <h3 class="cardHeadline"><b>GET TOGETHER</b></h3>
+                    <p class="cardText fontThin">Getting together to clean up the environment allows us to make a greater positive impact by combining efforts to remove waste and restore natural areas. It also fosters community engagement, raising awareness about environmental issues and inspiring collective responsibility for a healthier planet.<span class="text-primary"> in Hamburg </span></p>
+                    <a href="#" class="cardButton">Check out Events nearby</a>
+                </div>
+            </div>
+            <div class="cardBody orange">
+                <svg class="cardIcon" viewBox="0 0 1024 1024">
+                    <g style="fill: white">
+                        <path d="M680.89,649.87L991,556.4c43.99-13.26,43.99-75.55,0-88.81l-310.11-93.46c-14.89-4.49-26.54-16.14-31.02-31.02
+                                    L556.41,33C543.15-11,480.85-11,467.59,33l-93.46,310.11c-4.49,14.89-16.14,26.54-31.02,31.02L33,467.59
+                                    c-43.99,13.26-44,75.55,0,88.81l310.11,93.47c14.89,4.49,26.54,16.14,31.02,31.02L467.59,991c13.26,43.99,75.55,43.99,88.81,0
+                                    l93.46-310.11C654.36,666.01,666,654.36,680.89,649.87z"/>
+                    </g>
+                </svg>
+                <div class="cardBodyText">
+                    <hr class="cardLine">
+                    <h3 class="cardHeadline"><b>CLEAN AS A TEAM</b></h3>
+                    <p class="cardText fontThin">Getting together to clean up the environment allows us to make a greater positive impact by combining efforts to remove waste and restore natural areas. It also fosters community engagement, raising awareness about environmental issues and inspiring collective responsibility for a healthier planet.<span class="text-primary"> in Hamburg </span></p>
+                    <a href="#" class="cardButton">Check out Events nearby</a>
+                </div>
+            </div>
+            <div class="cardBody green">
+                <svg class="cardIcon" viewBox="0 0 1024 1024">
+                    <g style="fill: white">
+                        <path d="M680.89,649.87L991,556.4c43.99-13.26,43.99-75.55,0-88.81l-310.11-93.46c-14.89-4.49-26.54-16.14-31.02-31.02
+                                    L556.41,33C543.15-11,480.85-11,467.59,33l-93.46,310.11c-4.49,14.89-16.14,26.54-31.02,31.02L33,467.59
+                                    c-43.99,13.26-44,75.55,0,88.81l310.11,93.47c14.89,4.49,26.54,16.14,31.02,31.02L467.59,991c13.26,43.99,75.55,43.99,88.81,0
+                                    l93.46-310.11C654.36,666.01,666,654.36,680.89,649.87z"/>
+                    </g>
+                </svg>
+                <div class="cardBodyText">
+                    <hr class="cardLine">
+                    <h3 class="cardHeadline"><b>MAKE A CHANGE</b></h3>
+                    <p class="cardText fontThin">Getting together to clean up the environment allows us to make a greater positive impact by combining efforts to remove waste and restore natural areas. It also fosters community engagement, raising awareness about environmental issues and inspiring collective responsibility for a healthier planet.<span class="text-primary"> in Hamburg </span></p>
+                    <a href="#" class="cardButton">Check out Events nearby</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
