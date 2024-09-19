@@ -1,9 +1,9 @@
 <!-- index_toolbar_buttons.html -->
 <div class="toolbar toolbar-buttons">
-    {% if role == 3 or role == 2 %} <!-- Admin and Creator roles -->
     <form action="{{ url_for('set_view', view_name='home') }}" method="POST">
         <button type="submit">Home</button>
     </form>
+    {% if role == 3 or role == 2 %} <!-- Admin and Creator roles -->
     <form action="{{ url_for('set_view', view_name='event-create') }}" method="POST">
         <button type="submit">Create Event</button>
     </form>

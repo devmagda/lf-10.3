@@ -350,16 +350,15 @@ def post_subscribe():
     try:
         # Get event_id and user_id from the form
         event_id = request.form.get('event_id')
-        user_id = request.form.get('user_id')
 
         # Check if event_id and user_id are provided
-        if not event_id or not user_id:
-            return "event_id and user_id are required", 400
+        if not event_id:
+            return "event_id is required", 400
 
         # Call the function to subscribe
-        subscribe(event_id, user_id)
+        subscribe(event_id, current_user.id)
 
-        return "Subscription successful", 200
+        return redirect(url_for('index'))
     except Exception as e:
         return str(e), 500
 

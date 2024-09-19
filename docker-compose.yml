@@ -16,20 +16,6 @@ services:
     networks:
       - db_network
 
-  flask-app:
-    build: .
-    container_name: flask-app
-    ports:
-      - "5000:5000"
-    environment:
-      - FLASK_APP=app.py
-      - FLASK_ENV=development
-      - DATABASE_URL=postgresql://postgres:postgres@postgres-db:5432/dbdev
-    depends_on:
-      - db
-    networks:
-      - db_network
-
 volumes:
   postgres_data:
 

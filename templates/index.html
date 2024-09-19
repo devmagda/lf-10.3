@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Example</title>
+    <title>{{ view }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}">
 </head>
 <body>
-    <h1>Current ABC View: {{ view }}</h1>
 
     {% include 'index_toolbar_buttons.html' %}
     {% include 'index_container.html' %}

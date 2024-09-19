@@ -1,56 +1,120 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e8f5e9;
+    color: #333;
+}
+
+/* Container Styles */
 .container {
-    
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Event Styles */
 .container-event {
-
-}
-
-.container-event-create {
-
+    padding: 20px;
 }
 
 .container-event-single {
-
+    border-top: 3px solid #388e3c;
 }
 
-.container-home {
-
+.event-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 10px;
 }
 
-.container-imprint {
-
+.event-owner, .event-description, .event-subscriptions {
+    margin-bottom: 10px;
 }
 
-.container-login {
-
+.event-description {
+    font-size: 16px;
+    line-height: 1.6;
 }
 
-
-.container-register {
-
-}
-
-.container-team {
-
-}
-
-.container-tos {
-
-}
-
+/* Sidebar Styles */
 .sidebar {
-
+    width: 300px;
+    float: right;
+    margin: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.sidebar-eventlist {
-
+.sidebar h1 {
+    font-size: 18px;
+    color: #388e3c;
+    margin-bottom: 15px;
 }
 
+.sidebar-eventlist form {
+    margin-bottom: 10px;
+}
+
+/* Toolbar Styles */
 .toolbar {
-
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #388e3c;
+    color: #ffffff;
 }
 
-.toolbar-buttons {
+.toolbar-buttons form {
+    margin: 0;
+}
 
+.toolbar-buttons button {
+    background-color: #2e7d32;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.toolbar-buttons button:hover {
+    background-color: #1b5e20;
+}
+
+/* Form Buttons */
+button {
+    cursor: pointer;
+}
+
+form button {
+    background-color: #388e3c;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+form button:hover {
+    background-color: #2e7d32;
+}
+
+/* Utility Styles */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
 }
