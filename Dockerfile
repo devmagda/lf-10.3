@@ -13,9 +13,5 @@ RUN ls && pip install --no-cache-dir -r requirements.txt
 # Expose the port Flask will run on
 EXPOSE 5000
 
-# Enable hot reloading with Flask
-ENV FLASK_APP=app.py
-ENV FLASK_ENV=development
-
 # Run the app
 CMD ["flask", "run", "--host=0.0.0.0"]
