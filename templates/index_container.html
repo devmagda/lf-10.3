@@ -1,3 +1,4 @@
+<!-- Corresponds to view.py (class: View) -->
 <div class="container">
     {% if view == 'HOME' %}
         {% include 'index_container_home.html' %}
@@ -18,7 +19,6 @@
     {% elif view == 'TEAM' %}
         {% include 'index_container_team.html' %}
     {% else %}
-        <!-- Default content or placeholder -->
         <p>Select a view from the toolbar.</p>
     {% endif %}
 </div>

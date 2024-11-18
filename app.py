@@ -1,20 +1,23 @@
 from enum import Enum
 
 import psycopg2
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user, UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 import os
 from dotenv import load_dotenv
 import psycopg2
 
+from app.config import Config
+from app.models import View
+from app.services import SessionManager
 
 load_dotenv()
 
 # App Configurations
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your_secret_key_here')
+app.config['SECRET_KEY'] = Config.SECRET_KEY
 
 # Check if SECRET_KEY is loaded correctly
 print("SECRET_KEY:", app.config['SECRET_KEY'])
@@ -74,52 +77,24 @@ class UserRole(Enum):
         raise ValueError(f"Invalid role ID: {role_id}")
 
 
-class View(Enum):
-    HOME = 'home'
-    LOGIN = 'login'
-    REGISTER = 'register'
-    TERMS = 'terms-and-conditions'
-    IMPRINT = 'imprint'
-    TEAM = 'team'
-    EVENT_ALL = 'all-events'
-    EVENT_SINGLE = 'single-event'
-    EVENT_CREATE = 'event-create'
-
-
-class SessionManager:
-    @staticmethod
-    def set_focused_event_id(event_id):
-        session['focused_event_id'] = event_id
-
-    @staticmethod
-    def get_focused_event_id():
-        view_value = session.get('focused_event_id', None)
-        return view_value
-
-    @staticmethod
-    def set_view(view: View):
-        session['view'] = view.value  # Store only the value of the enum
-
-    @staticmethod
-    def get_view():
-        view_value = session.get('view', View.HOME.value)  # Default to HOME if 'view' is not set
-        return View(view_value)  # Convert the stored value back to a View enum
-
-    @staticmethod
-    def get_user_role():
-        return UserRole.get_by_id(session.get('role', UserRole.GUEST.value))
-
-    @staticmethod
-    def set_user_role(role: UserRole):
-        session['role'] = role.value
-
-
 # Login Configurations
 class User(UserMixin):
     def __init__(self, id, username, role):
         self.id = id
         self.username = username
         self.role = role
+
+    def is_admin(self):
+        return self.role == UserRole.ADMIN
+
+    def is_event_creator(self):
+        return self.role == UserRole.CREATOR
+
+    def is_user(self):
+        return self.role == UserRole.USER
+
+    def is_guest(self):
+        return self.role == UserRole.GUEST
 
 
 @login_manager.user_loader
@@ -133,11 +108,11 @@ def load_user(user_id):
 # Database Functions
 def get_db():
     return psycopg2.connect(
-        user=os.getenv('DB_USER', 'postgres'),
-        password=os.getenv('DB_PASSWORD', 'postgres'),
-        host=os.getenv('DB_HOST', 'localhost'),
-        port=os.getenv('DB_PORT', '5432'),
-        database=os.getenv('DB_NAME', 'dbdev')
+        user=Config.DB_USER,
+        password=Config.DB_PASSWORD,
+        host=Config.DB_HOST,
+        port=Config.DB_PORT,
+        database=Config.DB_NAME
     )
 
 
