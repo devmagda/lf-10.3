@@ -14,7 +14,7 @@ load_dotenv()
 # App Configurations
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your_secret_key_here')
 
 # Check if SECRET_KEY is loaded correctly
 print("SECRET_KEY:", app.config['SECRET_KEY'])
@@ -133,11 +133,11 @@ def load_user(user_id):
 # Database Functions
 def get_db():
     return psycopg2.connect(
-        user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD"),
-        host=os.getenv("DB_HOST"),
-        port=os.getenv("DB_PORT"),
-        database=os.getenv("DB_NAME")
+        user=os.getenv('DB_USER', 'postgres'),
+        password=os.getenv('DB_PASSWORD', 'postgres'),
+        host=os.getenv('DB_HOST', 'localhost'),
+        port=os.getenv('DB_PORT', '5432'),
+        database=os.getenv('DB_NAME', 'dbdev')
     )
 
 
