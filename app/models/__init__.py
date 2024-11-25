@@ -1,2 +1,2 @@
-from user_role import UserRole
-from view import View
+from .user import UserRole, User
+from .view import View
