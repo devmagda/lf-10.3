@@ -11,7 +11,7 @@ from app.services import SessionManager, EventService
 views_blueprint = Blueprint('views', __name__)
 
 
-@views_blueprint.route('/view/<view_name>', methods=['POST'])
+@views_blueprint.route('/<view_name>', methods=['POST', 'GET'])
 def set_view(view_name):
     try:
         view = View(view_name)

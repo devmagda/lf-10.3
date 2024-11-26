@@ -38,7 +38,7 @@ def create_app():
     flaskr.register_blueprint(auth_blueprint)
     flaskr.register_blueprint(roles_blueprint)
     flaskr.register_blueprint(global_blueprint)
-    flaskr.register_blueprint(views_blueprint)
+    flaskr.register_blueprint(views_blueprint, url_prefix='/view')
     flaskr.register_blueprint(events_blueprint, url_prefix='/events')
 
     return flaskr
