@@ -1,37 +1,37 @@
 <!-- index_toolbar_buttons.html -->
 <div class="toolbar toolbar-buttons">
-    <form action="{{ url_for('set_view', view_name='home') }}" method="POST">
+    <form action="{{ url_for('views.set_view', view_name='home') }}" method="POST">
         <button type="submit">Home</button>
     </form>
     {% if role == 3 or role == 2 %} <!-- Admin and Creator roles -->
-    <form action="{{ url_for('set_view', view_name='event-create') }}" method="POST">
+    <form action="{{ url_for('views.set_view', view_name='event-create') }}" method="POST">
         <button type="submit">Create Event</button>
     </form>
     {% endif %}
 
     <!-- Common buttons for all users -->
-    <form action="{{ url_for('set_view', view_name='terms-and-conditions') }}" method="POST">
+    <form action="{{ url_for('views.set_view', view_name='terms-and-conditions') }}" method="POST">
         <button type="submit">Terms and Conditions</button>
     </form>
-    <form action="{{ url_for('set_view', view_name='imprint') }}" method="POST">
+    <form action="{{ url_for('views.set_view', view_name='imprint') }}" method="POST">
         <button type="submit">Imprint</button>
     </form>
-    <form action="{{ url_for('set_view', view_name='team') }}" method="POST">
+    <form action="{{ url_for('views.set_view', view_name='team') }}" method="POST">
         <button type="submit">Team</button>
     </form>
 
     {% if role == 0 %} <!-- Guest role -->
-    <form action="{{ url_for('set_view', view_name='login') }}" method="POST">
+    <form action="{{ url_for('views.set_view', view_name='login') }}" method="POST">
         <button type="submit">Login</button>
     </form>
-    <form action="{{ url_for('set_view', view_name='register') }}" method="POST">
+    <form action="{{ url_for('views.set_view', view_name='register') }}" method="POST">
         <button type="submit">Register</button>
     </form>
     {% endif %}
 
     <!-- Logout button, visible to all users except guests -->
     {% if role != 0 %}
-    <form action="{{ url_for('logout') }}" method="POST">
+    <form action="{{ url_for('auth.logout') }}" method="POST">
         <button type="submit">Logout</button>
     </form>
     {% endif %}
