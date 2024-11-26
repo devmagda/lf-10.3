@@ -20,7 +20,7 @@ def login():
             login_user(user)
             SessionManager.set_user_role(UserRole.get_by_id(user.role))
             SessionManager.set_view(View.HOME)
-            return redirect(url_for('index'))
+            return redirect(url_for('global.index'))
 
         return "Login failed. Please try again.", 500
 
@@ -41,7 +41,7 @@ def register():
 
         SessionManager.set_view(View.LOGIN)
 
-        return redirect(url_for('index'))
+        return redirect(url_for('global.index'))
 
     selectable_roles = RoleService.get_selectable_roles()
     return render_template('register.html', selectable_roles=selectable_roles)
@@ -52,4 +52,4 @@ def logout():
     logout_user()
     SessionManager.set_user_role(UserRole.GUEST)
     SessionManager.set_view(View.HOME)
-    return redirect(url_for('index'))
+    return redirect(url_for('global.index'))

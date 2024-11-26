@@ -25,7 +25,7 @@ class UserService:
 
     @staticmethod
     def user_exists(username):
-        user = connection.get_user_by_username(username)
+        user = UserService.get_user_by_username(username)
         return user is not None
 
     @staticmethod

@@ -20,7 +20,7 @@ def post_subscribe():
         # Call the function to subscribe
         EventService.subscribe(event_id, current_user.id)
 
-        return redirect(url_for('index'))
+        return redirect(url_for('global.index'))
     except Exception as e:
         return str(e), 500
 
@@ -39,7 +39,7 @@ def get_post_create_event():
     SessionManager.set_view(View.EVENT_SINGLE)
     SessionManager.set_focused_event_id(event_id)
 
-    return redirect(url_for('index'))
+    return redirect(url_for('global.index'))
 
 
 @events_blueprint.route('/<int:event_id>', methods=['POST'])
@@ -47,4 +47,4 @@ def get_post_create_event():
 def get_event(event_id):
     SessionManager.set_focused_event_id(event_id)
     SessionManager.set_view(View.EVENT_SINGLE)
-    return redirect(url_for('index'))
+    return redirect(url_for('global.index'))

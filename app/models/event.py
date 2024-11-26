@@ -9,3 +9,6 @@ class Event:
 
     def get_subscriptions(self):
         return ', '.join(self.subscriptions)
+
+    def get_id(self):
+        return self.id

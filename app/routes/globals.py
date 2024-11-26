@@ -16,25 +16,21 @@ global_blueprint = Blueprint('global', __name__)
 def index():
     view_name = SessionManager.get_view().name
     role_id = SessionManager.get_user_role().value
-    events = None
+    events = []
     focused_event_id = SessionManager.get_focused_event_id()
     focused_event = None
 
     if role_id >= UserRole.USER.value:
         event_ids = EventService.get_event_ids()
-        events = [Event]
         for event_id in event_ids:
             event_data = EventService.get_event_by_id(event_id)
             subscriptions = EventService.get_event_subscriptions(event_id)
             event = EventService.from_sql_data(event_data, subscriptions)
             events.append(event)
 
-    print(os)
-
     if view_name == View.EVENT_SINGLE.name and focused_event_id is not None:
         event_data = EventService.get_event_by_id(focused_event_id)
         subscriptions = EventService.get_event_subscriptions(focused_event_id)
         focused_event = EventService.from_sql_data(event_data, subscriptions)
-    url = url_for('global.index')
     return render_template('index.html', view=view_name, role=role_id, event_list=events, focused_event=focused_event)
 
