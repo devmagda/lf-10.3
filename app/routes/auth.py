@@ -47,7 +47,7 @@ def register():
     return render_template('register.html', selectable_roles=selectable_roles)
 
 
-@auth_blueprint.route('/logout', methods=['POST'])
+@auth_blueprint.route('/logout', methods=['POST', 'GET'])
 def logout():
     logout_user()
     SessionManager.set_user_role(UserRole.GUEST)
