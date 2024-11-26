@@ -9,7 +9,6 @@ from app.models.event import Event
 from app.services import SessionManager, EventService
 
 views_blueprint = Blueprint('views', __name__)
-#, template_folder='../templates', static_folder='../static'
 
 
 @views_blueprint.route('/view/<view_name>', methods=['POST'])

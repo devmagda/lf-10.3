@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from ..models import View
 from ..services import SessionManager, EventService
 
-events_blueprint = Blueprint('events', __name__, template_folder='./app/templates')
+events_blueprint = Blueprint('events', __name__)
 
 @events_blueprint.route('/subscribe', methods=['POST'])
 @login_required
