@@ -21,16 +21,10 @@ def index():
     focused_event = None
 
     if role_id >= UserRole.USER.value:
-        event_ids = EventService.get_event_ids()
-        for event_id in event_ids:
-            event_data = EventService.get_event_by_id(event_id)
-            subscriptions = EventService.get_event_subscriptions(event_id)
-            event = EventService.from_sql_data(event_data, subscriptions)
-            events.append(event)
+        events = EventService.get_all_events()
 
     if view_name == View.EVENT_SINGLE.name and focused_event_id is not None:
-        event_data = EventService.get_event_by_id(focused_event_id)
-        subscriptions = EventService.get_event_subscriptions(focused_event_id)
-        focused_event = EventService.from_sql_data(event_data, subscriptions)
+        focused_event = EventService.get_event(focused_event_id)
+
     return render_template('index.html', view=view_name, role=role_id, event_list=events, focused_event=focused_event)
 

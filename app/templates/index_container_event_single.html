@@ -1,14 +1,19 @@
 <div class="container container-event container-event-single">
-    <div class="event-title">{{ focused_event.title }}</div>
-    <div class="event-owner">Owner: {{ focused_event.owner_username }}</div>
-    <div class="event-description">{{ focused_event.description }}</div>
+    <div class="event-title">{{ focused_event.get_title() }}</div>
+    <div class="event-owner">Owner: {{ focused_event.get_owner_username() }}</div>
+    <div class="event-description">{{ focused_event.get_description() }}</div>
     <div class="event-subscriptions">
         Subscriptions: {{ focused_event.get_subscriptions() if focused_event.subscriptions else 'No subscriptions' }}
     </div>
 
     <form action="/events/subscribe" method="POST">
-        <input type="text" id="event_id" name="event_id" value="{{ focused_event.id }}" readonly style="display: none;">
-        <button type="submit">Surbscribe</button>
+        <input type="hidden" id="event_id" name="event_id" value="{{ focused_event.get_id() }}">
+        <button type="submit">Surbscibe</button>
     </form>
 
+    <form action="/events/comment" method="POST">
+        <input type="hidden" id="event_id" name="event_id" value="{{ focused_event.get_id() }}">
+        <textarea id="comment" name="comment" placeholder="Write your comment here..." rows="4" required></textarea>
+        <button type="submit">Add Comment</button>
+    </form>
 </div>
