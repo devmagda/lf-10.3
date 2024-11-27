@@ -1,6 +1,6 @@
 from .comments import CommentService
 from .subscriptions import SubscriptionService
-from ..models.event import Event
+from app.models.event import Event
 from .database import ConnectionUtil
 
 connection = ConnectionUtil.from_global_config()

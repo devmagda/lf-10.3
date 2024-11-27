@@ -1,9 +1,9 @@
 from flask import Blueprint, request, redirect, url_for
 from flask_login import login_required, current_user
 
-from ..models import View
-from ..services import SessionManager, EventService
-from ..services.comments import CommentService
+from app.models import View
+from app.services import SessionManager, EventService
+from app.services.comments import CommentService
 
 events_blueprint = Blueprint('events', __name__)
 

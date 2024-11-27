@@ -1,5 +1,5 @@
 from .database import ConnectionUtil
-from ..models.event import Comment
+from app.models.event import Comment
 
 connection = ConnectionUtil.from_global_config()
 

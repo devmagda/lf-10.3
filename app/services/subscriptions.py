@@ -1,5 +1,5 @@
 from .database import ConnectionUtil
-from ..models.event import Subscription
+from app.models.event import Subscription
 
 connection = ConnectionUtil.from_global_config()
 

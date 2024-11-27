@@ -1,5 +1,3 @@
-import os
-
 from flask import Blueprint, render_template
 
 from app.models import UserRole

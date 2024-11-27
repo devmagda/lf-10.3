@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-from ..services import RoleService
+from app.services import RoleService
 
 roles_blueprint = Blueprint('roles', __name__)
 

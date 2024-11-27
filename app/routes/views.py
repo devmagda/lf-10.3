@@ -1,5 +1,3 @@
-import os
-
 from flask import Blueprint, redirect, url_for
 
 from app.models import View

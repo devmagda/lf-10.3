@@ -1,7 +1,7 @@
-from flask import request, Request
+from flask import Request
 from werkzeug.security import generate_password_hash
 
-from ..models.user import User
+from app.models.user import User
 from . import ConnectionUtil
 
 connection = ConnectionUtil.from_global_config()

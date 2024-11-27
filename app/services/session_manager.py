@@ -1,5 +1,5 @@
 from flask import session
-from ..models import UserRole, View
+from app.models import UserRole, View
 
 
 class SessionManager:
