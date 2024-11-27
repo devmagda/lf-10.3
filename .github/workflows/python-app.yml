@@ -38,10 +38,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest coverage psycopg2  # Make sure psycopg2 is installed
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Lint with flake8
-      run: |
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Wait for PostgreSQL to be ready
       run: |
         until pg_isready -h localhost -U postgres; do
@@ -60,3 +56,7 @@ jobs:
       with:
         name: coverage-reports
         path: coverage-reports.tar.gz
+    - name: Lint with flake8
+      run: |
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
