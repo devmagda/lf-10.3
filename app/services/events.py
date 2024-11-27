@@ -77,3 +77,17 @@ class EventService:
         subscriptions = SubscriptionService.get_all_subscriptions_for_event(event_id)
         e = Event(event_id, owner_username, title, title_short, description, subscriptions, comments)
         return e
+
+    @classmethod
+    def get_events_for_user(cls, user_id):
+        cursor = connection.db.cursor()
+        cursor.execute("SELECT event_id, owner_username, title, title_short, description FROM event_owner_view where user_id = %s", (user_id,))
+        events = cursor.fetchall()
+        events_for_user = []
+        for event in events:
+            if event[0] is not None and event[1] is not None and event[2] is not None and event[3] is not None and \
+                    event[4] is not None:
+                e = EventService.from_event_base_sql(event)
+                events_for_user.append(e)
+        cursor.close()
+        return events_for_user

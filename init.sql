@@ -52,6 +52,7 @@ ORDER BY
 CREATE VIEW event_owner_view AS
 SELECT
     e.id AS event_id,
+    u.id AS user_id,
     e.title_short,
     e.title,
     e.description,
