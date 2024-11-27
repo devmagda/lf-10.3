@@ -2,8 +2,8 @@
 <div class="sidebar sidebar-eventlist">
     {% if event_list %}
         {% for event in event_list %}
-            <form action="{{ url_for('events.get_event', event_id=event.id) }}" method="POST">
-                <button type="submit">{{ event.title_short }}</button>
+            <form action="{{ url_for('events.get_event', event_id=event.get_id()) }}" method="POST">
+                <button type="submit">{{ event.get_title_short() }}</button>
             </form>
         {% endfor %}
     {% else %}
