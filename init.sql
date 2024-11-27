@@ -20,6 +20,15 @@ CREATE TABLE tbl_events (
     FOREIGN KEY (owner) REFERENCES tbl_users(id)
 );
 
+CREATE TABLE tbl_comments (
+    id SERIAL PRIMARY KEY,
+    event_id INT NOT NULL,
+    owner INT NOT NULL,
+    comment VARCHAR(255) NOT NULL,
+    FOREIGN KEY (owner) REFERENCES tbl_users(id),
+    FOREIGN KEY (event_id) REFERENCES tbl_events(id)
+);
+
 CREATE TABLE tbl_event_subscriptions (
     user_id INT NOT NULL,
     event_id INT NOT NULL,
@@ -28,14 +37,81 @@ CREATE TABLE tbl_event_subscriptions (
     FOREIGN KEY (event_id) REFERENCES tbl_events(id)
 );
 
--- Insert roles into ref_roles
+CREATE VIEW event_subscriptions AS
+SELECT
+    u.id AS subscription_id,
+    es.event_id,
+    u.username AS subscribed_username
+FROM
+    tbl_event_subscriptions es
+JOIN
+    tbl_users u ON es.user_id = u.id
+ORDER BY
+    es.event_id, u.username;
+
+CREATE VIEW event_owner_view AS
+SELECT
+    e.id AS event_id,
+    e.title_short,
+    e.title,
+    e.description,
+    u.username AS owner_username
+FROM
+    tbl_events e
+JOIN
+    tbl_users u
+ON
+    e.owner = u.id;
+
+CREATE VIEW comment_owner_view AS
+SELECT
+    c.id AS comment_id,
+    c.event_id,
+    e.title_short AS event_title,
+    c.comment,
+    u.username AS owner_username
+FROM
+    tbl_comments c
+JOIN
+    tbl_users u
+ON
+    c.owner = u.id
+JOIN
+    tbl_events e
+ON
+    c.event_id = e.id;
+
+CREATE VIEW event_with_comments_view AS
+SELECT
+    e.id AS event_id,
+    e.title_short,
+    e.title,
+    e.description,
+    u.username AS event_owner_username,
+    c.id AS comment_id,
+    c.comment,
+    cu.username AS comment_owner_username
+FROM
+    tbl_events e
+JOIN
+    tbl_users u
+ON
+    e.owner = u.id
+LEFT JOIN
+    tbl_comments c
+ON
+    e.id = c.event_id
+LEFT JOIN
+    tbl_users cu
+ON
+    c.owner = cu.id;
+
 INSERT INTO ref_roles (id, role) VALUES
 (0, 'Guest'),
 (1, 'User'),
 (2, 'Event-Creator'),
 (3, 'Admin');
 
--- Insert users into tbl_users with the correct role IDs
 INSERT INTO tbl_users (username, password, role_id) VALUES
 ('admin','scrypt:32768:8:1$GL6evrNet9sxTp5Z$34f9b39dcd9925c1e44c802bd2aabda69d5b53fc333a382a9a89a6288b34e71a479cf8ddcaabd252d6ce9d355e08c2e52337d50b3987d3006f5f56a25f7184e6',3),
 ('anne','scrypt:32768:8:1$fQxPATt0kdWA1Dk5$37dac204e7ad73cd4c4235bc0105800c6fbcc91752c404b4aeed1ec6828099b8a1a8fea527d3121fea0b55f273cbe36509fd703eca0ac6c97bbb26cdb04d3f2b',2),
@@ -46,10 +122,7 @@ INSERT INTO tbl_users (username, password, role_id) VALUES
 ('user3','scrypt:32768:8:1$pO5ia7ZEv3ffbJAc$ba952a6121b1f2bc45c2eae40ccd979cdd61323e9fbfaaab091f770b96d825e5c0d881a3e5967c0a74a140213a6d32432f3a6afe0a7dcea973399d915f58f308',1)
 ;
 
-
--- Insert detailed events into tbl_events
 INSERT INTO tbl_events (owner, title_short, title, description) VALUES
--- Event from the creator user
 (1, 'Young Clean-Up', 'Urban Clean-Up for Youth',
 'Join us for an exciting Urban Clean-Up event specifically designed for young people in our city. This initiative aims to bring together teenagers and young adults to tackle litter in key areas. Not only will you help beautify the city, but you will also have the chance to meet new friends, learn about environmental sustainability, and contribute to a cleaner, greener urban space. This event includes educational workshops on waste management and recycling, making it both fun and informative. Refreshments and cleanup supplies will be provided. Come and be part of a positive change in our community!'),
 
@@ -59,3 +132,16 @@ INSERT INTO tbl_events (owner, title_short, title, description) VALUES
 (1, 'Grandma''s Green Initiative', 'Generations Clean-Up',
 'Grandma''s Green Initiative invites people of all ages to participate in an intergenerational clean-up event aimed at bridging gaps between generations. This unique event encourages families and community members of all ages to come together for a day of cleaning and environmental awareness. Activities include neighborhood clean-ups, educational sessions on sustainable living, and interactive games for children and seniors. The event will also feature a storytelling session with our community’s beloved elders sharing their experiences and wisdom. Enjoy a day filled with cooperation, learning, and making a positive impact on our environment.')
 ;
+
+-- Positive and funny comments for events
+INSERT INTO tbl_comments (event_id, owner, comment) VALUES
+(1, 4, 'Cleaning the planet one gum wrapper at a time! Let’s do this!'),
+(1, 5, 'My trash bag is already full, and I’m just getting started!'),
+(2, 6, 'Who knew saving the planet could be such a great arm workout?'),
+(2, 7, 'Picking up trash and picking up good vibes. This is awesome!'),
+(3, 4, 'Grandma says we’re making the Earth cleaner for her grandkids. That’s me!'),
+(3, 5, 'The planet called and said, “Thank you!” Let’s keep going!'),
+(1, 6, 'Trash doesn’t stand a chance with this crew. Go team clean!'),
+(2, 7, 'Every bottle we pick up is one less swimming lesson for a turtle. Let’s save them!'),
+(3, 5, 'I found a penny while cleaning up! Saving the planet *and* making a profit.'),
+(3, 4, 'I came for the cleaning but stayed for the good vibes. Let’s make the Earth shine!');
