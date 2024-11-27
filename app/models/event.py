@@ -37,8 +37,16 @@ class Event:
     def get_description(self) -> str:
         return self.description
 
-    def get_owner_username(self):
+    def get_owner_username(self) -> str:
         return self.owner_username
+
+    def has_comments(self) -> bool:
+        return len(self.comments) > 0
+
+    def has_subscriptions(self) -> bool:
+        return len(self.subscriptions) > 0
+
+
 
 
 class Comment:

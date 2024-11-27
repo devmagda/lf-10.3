@@ -13,8 +13,9 @@ class EventService:
         events = cursor.fetchall()
         all_events = []
         for event in events:
-            e = EventService.from_event_base_sql(event)
-            all_events.append(e)
+            if event[0] is not None and event[1] is not None and event[2] is not None and event[3] is not None and event[4] is not None:
+                e = EventService.from_event_base_sql(event)
+                all_events.append(e)
         cursor.close()
         return all_events
 
