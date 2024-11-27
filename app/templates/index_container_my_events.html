@@ -4,12 +4,15 @@
             <div class="event">
                 <h2>{{ event.get_title() }}</h2>
                 <p>{{ event.get_description() }}</p>
+                <form action="{{ url_for('events.get_event', event_id=event.get_id()) }}" method="POST">
+                    <button type="submit">View Event</button>
+                </form>
             </div>
             <hr>
         {% endfor %}
     {% else %}
         <p>
-            You dont have any events created.<br>
+            You don't have any events created.<br>
             Create one <a href="/view/event-create">here</a>.
         </p>
     {% endif %}
