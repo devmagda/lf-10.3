@@ -1,3 +1,5 @@
+from .comments import CommentService
+from .subscriptions import SubscriptionService
 from ..models.event import Event
 from .database import ConnectionUtil
 
@@ -7,18 +9,14 @@ class EventService:
     @staticmethod
     def get_all_events():
         cursor = connection.db.cursor()
-        cursor.execute("SELECT * FROM tbl_events")
+        cursor.execute("SELECT event_id, owner_username, title, title_short, description FROM event_owner_view")
         events = cursor.fetchall()
+        all_events = []
+        for event in events:
+            e = EventService.from_event_base_sql(event)
+            all_events.append(e)
         cursor.close()
-        return events
-
-    @staticmethod
-    def get_all_events_with_users():
-        cursor = connection.db.cursor()
-        cursor.execute("SELECT e.*, u.username FROM tbl_events e LEFT JOIN tbl_users u ON e.owner = u.id")
-        events_users = cursor.fetchall()
-        cursor.close()
-        return events_users
+        return all_events
 
     @staticmethod
     def create_event(title_short, title, description, owner_id):
@@ -31,11 +29,10 @@ class EventService:
 
         # Fetch the ID of the newly created event
         event_id = cursor.fetchone()[0]
-
         connection.db.commit()
         cursor.close()
 
-        return event_id
+        return EventService.get_event(event_id)
 
     @staticmethod
     def subscribe(event_id, user_id):
@@ -48,14 +45,15 @@ class EventService:
         cursor.close()
 
     @staticmethod
-    def get_event_by_id(event_id):
+    def get_event(event_id):
         cursor = connection.db.cursor()
         cursor.execute(
-            "SELECT e.*, u.username FROM tbl_events e LEFT JOIN tbl_users u ON e.owner = u.id WHERE e.id = %s",
+            "SELECT event_id, owner_username, title, title_short, description FROM event_owner_view e WHERE e.event_id = %s",
             (event_id,))
         event = cursor.fetchone()
+        e = EventService.from_event_base_sql(event)
         cursor.close()
-        return event
+        return e
 
     @staticmethod
     def get_event_ids():
@@ -65,25 +63,15 @@ class EventService:
         cursor.close()
         return events
 
-    @staticmethod
-    def get_event_subscriptions(event_id):
-        cursor = connection.db.cursor()
-        cursor.execute(
-            "select u.username from tbl_event_subscriptions s left join tbl_users u on s.user_id = u.id where s.event_id = %s",
-            (event_id,))
-        subscriptions = cursor.fetchall()
-        cursor.close()
-        return subscriptions
 
     @staticmethod
-    def from_sql_data(event, subscriptions):
-        id = event[0]
-        owner_username = event[5]  # Owner's username is now in event[5] due to the LEFT JOIN
-        title_short = event[2]
-        title = event[3]
+    def from_event_base_sql(event):
+        event_id = event[0]
+        owner_username = event[1]
+        title = event[2]
+        title_short = event[3]
         description = event[4]
-
-        # Convert the subscriptions tuples into a flat list of usernames
-        subscription_list = [sub[0] for sub in subscriptions]
-
-        return Event(id, owner_username, title, title_short, description, subscription_list)
+        comments = CommentService.get_all_comments_for_event(event_id)
+        subscriptions = SubscriptionService.get_all_subscriptions_for_event(event_id)
+        e = Event(event_id, owner_username, title, title_short, description, subscriptions, comments )
+        return e
