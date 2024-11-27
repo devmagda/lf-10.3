@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 
 from ..models import View
 from ..services import SessionManager, EventService
+from ..services.comments import CommentService
 
 events_blueprint = Blueprint('events', __name__)
 
@@ -24,7 +25,21 @@ def post_subscribe():
     except Exception as e:
         return str(e), 500
 
+@events_blueprint.route('/comment', methods=['POST'])
+def post_comment():
+    try:
+        event_id = request.form.get('event_id')
+        if not event_id:
+            return "event_id is required", 400
 
+        comment = request.form.get('comment')
+        if not comment or comment == '':
+            return "comment is required and can not be empty", 400
+
+        CommentService.create_comment(event_id, current_user.id, comment)
+        return redirect(url_for('global.index'))
+    except Exception as e:
+        return str(e), 500
 
 @events_blueprint.route('/create', methods=['POST'])
 @login_required

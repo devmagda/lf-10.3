@@ -15,3 +15,15 @@ class CommentService:
             c = Comment(comment[0], comment[1], comment[2])
             all_comments.append(c)
         return all_comments
+
+    @staticmethod
+    def create_comment(event_id, owner, comment):
+        cursor = connection.db.cursor()
+        cursor.execute(
+            "INSERT INTO tbl_comments (event_id, owner, comment) VALUES (%s, %s, %s) RETURNING id",
+            (event_id, owner, comment)
+        )
+        comment_id = cursor.fetchone()[0]
+        connection.db.commit()
+        cursor.close()
+        return Comment(comment_id, comment, owner)
