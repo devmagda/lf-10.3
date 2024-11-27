@@ -12,6 +12,7 @@ class SubscriptionService:
         cursor.close()
         all_subscriptions = []
         for subscription in subscriptions:
-            s = Subscription(subscription[0], subscription[1])
-            all_subscriptions.append(s)
+            if subscription[0] is not None and subscription[1] is not None:
+                s = Subscription(subscription[0], subscription[1])
+                all_subscriptions.append(s)
         return all_subscriptions

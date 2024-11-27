@@ -1,0 +1,20 @@
+<div class="container container-event container-event-single container-event-single-comments">
+    <form action="/events/comment" method="POST">
+        <input type="hidden" id="event_id" name="event_id" value="{{ focused_event.get_id() }}">
+        <textarea id="comment" name="comment" placeholder="Write your comment here..." rows="4" required></textarea>
+        <button type="submit">Add Comment</button>
+    </form>
+
+    <div class="comment-list">
+        {% if focused_event.get_comments() and focused_event.has_comments()%}
+            {% for comment in focused_event.get_comments() %}
+                <div class="comment">
+                    <p><strong>{{ comment.get_username() }}</strong> says:</p>
+                    <p>{{ comment.get_comment() }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No comments available.</p>
+        {% endif %}
+    </div>
+</div>
