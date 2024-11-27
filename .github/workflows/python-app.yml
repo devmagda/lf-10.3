@@ -44,12 +44,12 @@ jobs:
           echo "Waiting for PostgreSQL to be ready..."
           sleep 2
         done
-    - name: Test with pytest and coverage
+    - name: Unit & Integration tests
       run: |
-        coverage run -m pytest
-    - name: Generate coverage report
+        coverage run -m pytest -v
+    - name: Test coverage
       run: |
-        coverage report
+        coverage report --omit="tests/*"
     - name: Upload coverage HTML artifact (Optional)
       if: success()
       uses: actions/upload-artifact@v3
