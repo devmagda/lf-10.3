@@ -2,6 +2,7 @@ from . import ConnectionUtil
 
 connection = ConnectionUtil.from_global_config()
 
+
 class RoleService:
     @staticmethod
     def get_all_roles():

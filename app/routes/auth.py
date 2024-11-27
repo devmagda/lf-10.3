@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, Response, redirect, url_for, render_template
+from flask import Blueprint, request, redirect, url_for, render_template
 from flask_login import login_user, logout_user
 from werkzeug.security import check_password_hash
 
@@ -6,6 +6,7 @@ from app.models import User, UserRole, View
 from app.services import UserService, SessionManager, RoleService
 
 auth_blueprint = Blueprint('auth', __name__, template_folder='./app/templates')
+
 
 @auth_blueprint.route('/login', methods=['GET', 'POST'])
 def login():

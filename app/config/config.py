@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
+
 class Config:
     # Database configuration with defaults
     DB_USER = os.getenv('DB_USER', 'postgres')

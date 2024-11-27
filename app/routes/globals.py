@@ -1,15 +1,12 @@
 import os
 
-from flask import Blueprint, jsonify, request, Response, redirect, url_for, render_template
-from flask_login import login_required, current_user
+from flask import Blueprint, render_template
 
 from app.models import UserRole
 from app.models import View
-from app.models.event import Event
 from app.services import SessionManager, EventService
 
 global_blueprint = Blueprint('global', __name__)
-#, template_folder='../templates', static_folder='../static'
 
 
 @global_blueprint.route('/')
@@ -27,4 +24,3 @@ def index():
         focused_event = EventService.get_event(focused_event_id)
 
     return render_template('index.html', view=view_name, role=role_id, event_list=events, focused_event=focused_event)
-

@@ -6,6 +6,7 @@ from . import ConnectionUtil
 
 connection = ConnectionUtil.from_global_config()
 
+
 class UserService:
     @staticmethod
     def get_user_by_id(user_id):

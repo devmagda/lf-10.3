@@ -6,6 +6,7 @@ from app.services import UserService
 from app.config import Config
 from app.routes import events_blueprint, roles_blueprint, auth_blueprint, global_blueprint, views_blueprint
 
+
 def create_app():
     flaskr = Flask(__name__)
     flaskr.config.from_object('app.config.Config')

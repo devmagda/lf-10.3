@@ -1,15 +1,16 @@
 from typing import List
 
+
 class Event:
     def __init__(
-        self, 
-        event_id: int, 
-        owner_username: str, 
-        title: str, 
-        title_short: str, 
-        description: str, 
-        subscriptions: List['Subscription'] = None, 
-        comments: List['Comment'] = None
+            self,
+            event_id: int,
+            owner_username: str,
+            title: str,
+            title_short: str,
+            description: str,
+            subscriptions: List['Subscription'] = None,
+            comments: List['Comment'] = None
     ) -> None:
         self.id: int = event_id
         self.owner_username: str = owner_username
@@ -45,8 +46,6 @@ class Event:
 
     def has_subscriptions(self) -> bool:
         return len(self.subscriptions) > 0
-
-
 
 
 class Comment:

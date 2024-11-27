@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, Response, redirect, url_for, render_template
+from flask import Blueprint, request, redirect, url_for
 from flask_login import login_required, current_user
 
 from ..models import View
@@ -6,6 +6,7 @@ from ..services import SessionManager, EventService
 from ..services.comments import CommentService
 
 events_blueprint = Blueprint('events', __name__)
+
 
 @events_blueprint.route('/subscribe', methods=['POST'])
 @login_required
@@ -25,6 +26,7 @@ def post_subscribe():
     except Exception as e:
         return str(e), 500
 
+
 @events_blueprint.route('/comment', methods=['POST'])
 def post_comment():
     try:
@@ -40,6 +42,7 @@ def post_comment():
         return redirect(url_for('global.index'))
     except Exception as e:
         return str(e), 500
+
 
 @events_blueprint.route('/create', methods=['POST'])
 @login_required

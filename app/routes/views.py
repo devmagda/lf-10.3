@@ -1,12 +1,9 @@
 import os
 
-from flask import Blueprint, jsonify, request, Response, redirect, url_for, render_template
-from flask_login import login_required, current_user
+from flask import Blueprint, redirect, url_for
 
-from app.models import UserRole
 from app.models import View
-from app.models.event import Event
-from app.services import SessionManager, EventService
+from app.services import SessionManager
 
 views_blueprint = Blueprint('views', __name__)
 

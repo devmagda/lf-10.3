@@ -5,6 +5,7 @@ from .database import ConnectionUtil
 
 connection = ConnectionUtil.from_global_config()
 
+
 class EventService:
     @staticmethod
     def get_all_events():
@@ -13,7 +14,8 @@ class EventService:
         events = cursor.fetchall()
         all_events = []
         for event in events:
-            if event[0] is not None and event[1] is not None and event[2] is not None and event[3] is not None and event[4] is not None:
+            if event[0] is not None and event[1] is not None and event[2] is not None and event[3] is not None and \
+                    event[4] is not None:
                 e = EventService.from_event_base_sql(event)
                 all_events.append(e)
         cursor.close()
@@ -64,7 +66,6 @@ class EventService:
         cursor.close()
         return events
 
-
     @staticmethod
     def from_event_base_sql(event):
         event_id = event[0]
@@ -74,5 +75,5 @@ class EventService:
         description = event[4]
         comments = CommentService.get_all_comments_for_event(event_id)
         subscriptions = SubscriptionService.get_all_subscriptions_for_event(event_id)
-        e = Event(event_id, owner_username, title, title_short, description, subscriptions, comments )
+        e = Event(event_id, owner_username, title, title_short, description, subscriptions, comments)
         return e

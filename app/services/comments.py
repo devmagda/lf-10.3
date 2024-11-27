@@ -3,11 +3,14 @@ from ..models.event import Comment
 
 connection = ConnectionUtil.from_global_config()
 
+
 class CommentService:
     @staticmethod
     def get_all_comments_for_event(event_id):
         cursor = connection.db.cursor()
-        cursor.execute("SELECT comment_id, comment, comment_owner_username FROM event_with_comments_view WHERE event_id = %s ORDER BY event_with_comments_view.comment_id DESC", (event_id,))
+        cursor.execute(
+            "SELECT comment_id, comment, comment_owner_username FROM event_with_comments_view WHERE event_id = %s ORDER BY event_with_comments_view.comment_id DESC",
+            (event_id,))
         comments = cursor.fetchall()
         cursor.close()
         all_comments = []

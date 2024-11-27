@@ -1,6 +1,7 @@
 from flask import session
 from ..models import UserRole, View
 
+
 class SessionManager:
 
     @staticmethod

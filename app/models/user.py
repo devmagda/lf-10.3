@@ -1,6 +1,5 @@
 from flask_login import UserMixin
 from enum import Enum
-from typing import Type, TypeVar
 
 
 class UserRole(Enum):

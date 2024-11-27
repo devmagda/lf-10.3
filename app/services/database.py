@@ -2,6 +2,7 @@ import psycopg2
 
 from app.config import Config
 
+
 class Connection:
     def __init__(self, user, password, host, port, database):
         self.db = psycopg2.connect(
