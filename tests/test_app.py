@@ -2,13 +2,16 @@ import pytest
 
 from app.app import create_app
 
+
 @pytest.fixture
 def app():
     return create_app()
 
+
 def test_app():
     app = create_app()
     assert app is not None
+
 
 def test_blueprints_registered(app):
     # Check if the blueprints are registered
