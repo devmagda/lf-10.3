@@ -24,12 +24,5 @@ class ConnectionUtil:
         port = Config.DB_PORT
         database = Config.DB_NAME
 
-        # Print each variable
-        print(f"DB_USER: {user}")
-        print(f"DB_PASSWORD: {password}")
-        print(f"DB_HOST: {host}")
-        print(f"DB_PORT: {port}")
-        print(f"DB_NAME: {database}")
-
         # Create and return the Connection object
         return Connection(user=user, password=password, host=host, port=port, database=database)
