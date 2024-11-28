@@ -27,4 +27,4 @@ def index():
     if role_id >= UserRole.CREATOR.value and view_name == View.MY_EVENTS.name:
         my_events = EventService.get_events_for_user(current_user.id)
 
-    return render_template('index.html', view=view_name, role=role_id, event_list=events, focused_event=focused_event, my_events=my_events)
+    return render_template('index.html', view=view_name, role=role_id, event_list=events, focused_event=focused_event, my_events=my_events, logged_in=SessionManager.is_logged_in())

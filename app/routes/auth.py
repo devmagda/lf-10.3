@@ -44,7 +44,10 @@ def register():
 
         return redirect(url_for('global.index'))
 
-    SessionManager.set_view(View.REGISTER)
+    if SessionManager.is_logged_in():
+        SessionManager.set_view(View.HOME)
+    else:
+        SessionManager.set_view(View.REGISTER)
     return redirect(url_for('global.index'))
 
 

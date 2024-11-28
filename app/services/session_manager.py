@@ -29,3 +29,7 @@ class SessionManager:
     @staticmethod
     def set_user_role(role: UserRole):
         session['role'] = role.value
+
+    @staticmethod
+    def is_logged_in():
+        return SessionManager.get_user_role().value > UserRole.GUEST.value
