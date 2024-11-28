@@ -177,3 +177,13 @@ form button:hover {
 .close-btn:hover {
     color: #2e7d32;
 }
+
+.blinking-text {
+    animation: blink 1s steps(5, start) infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
