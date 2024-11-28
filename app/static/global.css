@@ -144,10 +144,10 @@ form button:hover {
 }
 
 .trash-image {
-    max-width: 100%;
     height: auto;
     border-radius: 8px;
     margin-bottom: 15px;
+    width: 200px
 }
 
 .btn-trash {
