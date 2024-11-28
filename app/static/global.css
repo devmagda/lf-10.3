@@ -114,3 +114,66 @@ form button:hover {
     display: table;
     clear: both;
 }
+
+.ad {
+    background-color: #ffeb3b;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 20px auto;
+    width: 300px; /* Make the ad as small as possible */
+    max-width: 100%;
+    position: fixed; /* Position the ad at the right side of the screen */
+    top: 20px;
+    right: 20px;
+    z-index: 1000; /* Ensure the ad is above other content */
+    display: block; /* Always shown by default */
+}
+
+.ad-content h2 {
+    font-size: 20px; /* Smaller heading */
+    color: #388e3c;
+    margin-bottom: 10px;
+}
+
+.ad-content p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.trash-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.btn-trash {
+    background-color: #388e3c;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-trash:hover {
+    background-color: #2e7d32;
+}
+
+/* Close button (X) styles */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #388e3c;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.close-btn:hover {
+    color: #2e7d32;
+}

@@ -60,7 +60,7 @@ def get_post_create_event():
     return redirect(url_for('global.index'))
 
 
-@events_blueprint.route('/<int:event_id>', methods=['POST'])
+@events_blueprint.route('/<int:event_id>', methods=['get', 'POST'])
 @login_required
 def get_event(event_id):
     SessionManager.set_focused_event_id(event_id)

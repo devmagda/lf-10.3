@@ -44,8 +44,8 @@ def register():
 
         return redirect(url_for('global.index'))
 
-    selectable_roles = RoleService.get_selectable_roles()
-    return render_template('register.html', selectable_roles=selectable_roles)
+    SessionManager.set_view(View.REGISTER)
+    return redirect(url_for('global.index'))
 
 
 @auth_blueprint.route('/logout', methods=['POST', 'GET'])
