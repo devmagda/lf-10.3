@@ -1,22 +1,26 @@
 <!-- index_container_register.html -->
 <div class="container container-register">
-    <h2>Register</h2>
-    <form action="/register" method="POST">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" required><br><br>
-
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br><br>
-
-        <label for="role_id">Role:</label><br>
-        <select id="role_id" name="role_id" required>
-            <option value="1">User</option>
-            <option value="2">Admin</option>
-            <option value="3">Creator</option>
-        </select><br><br>
-
-        <button type="submit">Register</button>
-    </form>
-
-    <p>Already have an account? <a href="/view/login">Login here</a></p>
+    <h1 class="team_headline">CREATE AN ACCOUNT</h1>
+    <div class="login_container">
+        <form action="/register" method="POST">
+            <div class="login_form_container">
+                <label for="username" class="credidentials">USERNAME:</label><br>
+                <input type="text" id="username" name="username" class="input_fields" required><br><br>
+            </div>
+            <div class="login_form_container">
+                <label for="password" class="credidentials">PASSWORD:</label><br>
+                <input type="password" id="password" name="password" class="input_fields" required><br><br>
+            </div>
+            <div class="login_form_container">
+               <label for="role_id" class="credidentials">ROLE:</label><br>
+                <select id="role_id" name="role_id" class="input_fields" required>
+                    <option value="1">User</option>
+                    <option value="2">Admin</option>
+                    <option value="3">Creator</option>
+                </select><br><br>
+            </div>
+            <button type="submit" class="highlight_button">MAKE IT SPARKLE</button>
+        </form>
+        <p>Already have an account? <a href="/view/login" class="login_register">Login here</a></p>
+    </div>
 </div>

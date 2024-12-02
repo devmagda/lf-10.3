@@ -1,14 +1,23 @@
 <!-- index_container_login.html -->
 <div class="container container-login">
-    <h2>Login</h2>
-    <form action="/login" method="POST">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br><br>
-        <button type="submit">Login</button>
-    </form>
-
-    <p>Don't have an account? <a href="/view/register">Register here</a></p>
+    <h1 class="team_headline">
+        LOG INTO YOUR ACCOUNT
+        <br>
+        AND START CLEANING
+    </h1>
+    <div class="login_container">
+        <form action="/login" method="POST">
+            <div class="login_form_container">
+                <label for="username" class="credidentials">USERNAME:</label><br>
+                <input type="text" id="username" name="username" class="input_fields" required><br><br>
+            </div>
+            <div class="login_form_container">
+                <label for="password" class="credidentials">PASSWORD:</label><br>
+                <input type="password" id="password" name="password" class="input_fields" required><br><br>
+            </div>
+            <button type="submit" class="highlight_button">MAKE IT SPARKLE</button>
+        </form>
+        <p>Don't have an account? <a href="/view/register" class="login_register">Register here</a></p>
+    </div>
 </div>
 

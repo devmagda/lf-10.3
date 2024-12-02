@@ -3,24 +3,13 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e8f5e9;
+    background-color: #b7f47d;
     color: #000; /* Make all text black */
     text-rendering: optimizeLegibility; /* Smooth text rendering */
     -webkit-font-smoothing: antialiased; /* Smooth text for WebKit browsers */
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Ensure the body covers the full viewport height */
-}
-
-/* Container Styles */
-.container {
-    flex: 1; /* Allow the container to grow and push the footer down */
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Footer Styles */
@@ -68,14 +57,11 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #388e3c;
-    color: #ffffff;
 }
 
 .toolbar-buttons button {
-    background-color: #2e7d32;
-    border: none;
-    color: white;
+    color: black;
+    font-weight: bold;
     padding: 10px 15px;
     text-align: center;
     text-decoration: none;
@@ -83,29 +69,18 @@ body {
     font-size: 14px;
     margin: 0 5px;
     cursor: pointer;
+    border: 2px solid black;
     border-radius: 5px;
 }
 
 .toolbar-buttons button:hover {
-    background-color: #1b5e20;
+    background-color: #F3BABA;
 }
 
-/* Form Buttons */
-button {
-    cursor: pointer;
-}
-
-form button {
-    background-color: #388e3c;
-    border: none;
-    color: #fff;
-    padding: 10px 20px;
-    font-size: 14px;
+.highlight_button {
+    border: 2px solid black;
     border-radius: 5px;
-}
-
-form button:hover {
-    background-color: #2e7d32;
+    background-color: #ffeb3b;
 }
 
 /* Utility Styles */
@@ -186,4 +161,234 @@ form button:hover {
     50% {
         opacity: 0;
     }
+}
+
+.placeholder {
+    flex: 1; /* Allow the container to grow and push the footer down */
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    background-image: url("../static/content/group_sunset_view.avif");
+    height: 700px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    width: 95%;
+    margin: 0 auto;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.hometown_sparkle {
+    font-size: 4em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.cleancity_together {
+    text-align: center;
+    font-size: 1.5em;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 100px;
+}
+
+.what_we_do {
+    display: flex;
+    max-width: 1200px;
+    margin: 40px auto;
+    margin-bottom: 200px;
+    padding: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    background-color: #89CFF0;
+    border: 2px solid black;
+    border-radius: 5px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+}
+
+.what_we_do_headline {
+    font-size: 3.5em;
+    font-weight: bold;
+    margin: 0;
+    color: #F3BABA;
+    text-shadow:
+        3px 3px 2px #000,
+        -3px 3px 2px #000,
+        -3px -3px 0 #000,
+        3px -3px 0 #000;
+}
+
+.headlines {
+    width: 20%;
+    font-size: 1.2em;
+    text-align: left;
+}
+
+.what_we_do_text {
+    width: 30%;
+    font-size: 1.2em;
+    text-align: right;
+}
+
+
+.how_it_works_headline {
+    font-size: 3.5em;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    padding-top: 50px;
+}
+
+.how_it_works_cards {
+    display: flex;
+    max-width: 100%;
+    margin: 40px auto;
+    padding: 25px;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    margin-bottom: 100px;
+}
+
+.huge_1 {
+    font-size: 8em;
+    color: #ffeb3b;
+    text-shadow:
+        3px 3px 2px #000,
+        -3px 3px 2px #000,
+        -3px -3px 0 #000,
+        3px -3px 0 #000;
+    margin: 0;
+    text-align: center;
+}
+
+.huge_2 {
+    font-size: 8em;
+    color: #F3BABA;
+    text-shadow:
+        3px 3px 2px #000,
+        -3px 3px 2px #000,
+        -3px -3px 0 #000,
+        3px -3px 0 #000;
+    margin: 0;
+    text-align: center;
+}
+
+.huge_3 {
+    font-size: 8em;
+    color: #89CFF0;
+    text-shadow:
+        3px 3px 2px #000,
+        -3px 3px 2px #000,
+        -3px -3px 0 #000,
+        3px -3px 0 #000;
+    margin: 0;
+    text-align: center;
+}
+
+.card_headline {
+    text-align: center;
+    font-size: 1.75em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.card_subline {
+    text-align: center;
+    margin: 0;
+}
+
+.card_width {
+    width: 30%;
+}
+
+.team_headline {
+    font-size: 4em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.team_container {
+    display: flex;
+    max-width: 1200px;
+    margin: 40px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid black;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.team_image {
+    height: 400px;
+    width: auto;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+.team_text_container {
+    padding-right: 200px;
+    padding-left: 50px;
+    padding-top: 15px;
+}
+
+.card_container {
+    background-color: #c5aff3;
+    margin: 0 auto;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-radius: 5px;
+}
+
+.login_container {
+    display: flex;
+    max-width: 800px;
+    margin: 40px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid black;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    text-align: center;
+    margin-top: 200px;
+    padding-top: 50px;
+}
+
+.login_register {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.credidentials {
+    height: 50px;
+    width: 200px;
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.login_form_container {
+    display: flex;
+    margin: 40px auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    text-align: center;
+    justify-content: center;
+}
+
+.input_fields {
+    height: 17px;
 }

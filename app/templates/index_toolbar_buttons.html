@@ -1,7 +1,7 @@
 <!-- index_toolbar_buttons.html -->
 <div class="toolbar toolbar-buttons">
     <form action="{{ url_for('views.set_view', view_name='home') }}" method="POST">
-        <button type="submit">Home</button>
+        <button type="submit" class="highlight_button">Home</button>
     </form>
     {% if role == 3 or role == 2 %} <!-- Admin and Creator roles -->
     <form action="{{ url_for('views.set_view', view_name='event-create') }}" method="POST">
