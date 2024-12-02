@@ -378,6 +378,7 @@ body {
     width: 200px;
     font-size: 1.25em;
     font-weight: bold;
+    text-align: left;
 }
 
 .login_form_container {
@@ -391,4 +392,15 @@ body {
 
 .input_fields {
     height: 17px;
+    width: 200px;
+}
+
+#role_id {
+    height: 25px;
+}
+
+.make_it_sparkle {
+    font-size: 1.25em;
+    font-weight: bold;
+    cursor: pointer;
 }
