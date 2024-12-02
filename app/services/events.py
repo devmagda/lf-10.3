@@ -10,7 +10,7 @@ class EventService:
     @staticmethod
     def get_all_events():
         cursor = connection.db.cursor()
-        cursor.execute("SELECT event_id, owner_username, title, title_short, description FROM event_owner_view")
+        cursor.execute("SELECT event_id, owner_username, title, title_short, description, is_html FROM event_owner_view")
         events = cursor.fetchall()
         all_events = []
         for event in events:
@@ -22,13 +22,13 @@ class EventService:
         return all_events
 
     @staticmethod
-    def create_event(title_short, title, description, owner_id):
+    def create_event(title_short, title, description, is_html, owner_id):
         cursor = connection.db.cursor()
         cursor.execute("""
-            INSERT INTO tbl_events (owner, title_short, title, description) 
-            VALUES (%s, %s, %s, %s)
+            INSERT INTO tbl_events (owner, title_short, title, description, is_html) 
+            VALUES (%s, %s, %s, %s, %s)
             RETURNING id
-        """, (owner_id, title_short, title, description))
+        """, (owner_id, title_short, title, description, is_html))
 
         # Fetch the ID of the newly created event
         event_id = cursor.fetchone()[0]
@@ -51,7 +51,7 @@ class EventService:
     def get_event(event_id):
         cursor = connection.db.cursor()
         cursor.execute(
-            "SELECT event_id, owner_username, title, title_short, description FROM event_owner_view e WHERE e.event_id = %s",
+            "SELECT event_id, owner_username, title, title_short, description, is_html FROM event_owner_view e WHERE e.event_id = %s",
             (event_id,))
         event = cursor.fetchone()
         e = EventService.from_event_base_sql(event)
@@ -73,15 +73,16 @@ class EventService:
         title = event[2]
         title_short = event[3]
         description = event[4]
+        is_html = event[5]
         comments = CommentService.get_all_comments_for_event(event_id)
         subscriptions = SubscriptionService.get_all_subscriptions_for_event(event_id)
-        e = Event(event_id, owner_username, title, title_short, description, subscriptions, comments)
+        e = Event(event_id, owner_username, title, title_short, description, is_html, subscriptions, comments)
         return e
 
     @classmethod
     def get_events_for_user(cls, user_id):
         cursor = connection.db.cursor()
-        cursor.execute("SELECT event_id, owner_username, title, title_short, description FROM event_owner_view where user_id = %s", (user_id,))
+        cursor.execute("SELECT event_id, owner_username, title, title_short, description, is_html FROM event_owner_view where user_id = %s", (user_id,))
         events = cursor.fetchall()
         events_for_user = []
         for event in events:
