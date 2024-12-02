@@ -2,8 +2,7 @@
     {% if my_events %}
         {% for event in my_events %}
             <div class="event">
-                <h2><a href="{{ url_for('events.get_event', event_id=event.get_id()) }}">View Event</a></h2>
-                <p>{{ event.get_description() }}</p>
+                <h2><a href="{{ url_for('events.get_event', event_id=event.get_id()) }}">{{ event.get_title() }}</a></h2>
                 <form action="{{ url_for('events.get_event', event_id=event.get_id()) }}" method="POST">
                     <button type="submit">View Event</button>
                 </form>
