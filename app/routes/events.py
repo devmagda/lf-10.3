@@ -50,9 +50,10 @@ def get_post_create_event():
     title_short = request.form['title_short']
     title = request.form['title']
     description = request.form['description']
+    is_html = request.form['is_html']
     owner_id = current_user.id
 
-    event_id = EventService.create_event(title_short, title, description, owner_id).get_id()
+    event_id = EventService.create_event(title_short, title, description, is_html, owner_id).get_id()
 
     SessionManager.set_view(View.EVENT_SINGLE)
     SessionManager.set_focused_event_id(event_id)

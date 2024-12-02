@@ -1,5 +1,7 @@
 from typing import List
 
+from markupsafe import Markup
+
 
 class Event:
     def __init__(
@@ -9,6 +11,7 @@ class Event:
             title: str,
             title_short: str,
             description: str,
+            is_html: bool = False,
             subscriptions: List['Subscription'] = None,
             comments: List['Comment'] = None
     ) -> None:
@@ -16,7 +19,12 @@ class Event:
         self.owner_username: str = owner_username
         self.title: str = title
         self.title_short: str = title_short
-        self.description: str = description
+        if is_html:
+            self.description: str = description
+        else:
+            self.description: str = Markup(description)
+
+        self.is_html: bool = is_html
         self.subscriptions: List['Subscription'] = subscriptions or []
         self.comments: List['Comment'] = comments or []
 
@@ -47,6 +55,8 @@ class Event:
     def has_subscriptions(self) -> bool:
         return len(self.subscriptions) > 0
 
+    def is_html_formatted(self) -> bool:
+        return self.is_html
 
 class Comment:
     def __init__(self, comment_id: int, comment: str, username: str) -> None:
