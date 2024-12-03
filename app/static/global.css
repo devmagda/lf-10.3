@@ -136,23 +136,27 @@ body {
 
 /* Sidebar Styles */
 .sidebar {
-    width: 300px;
-    height: 420px;
+    width: 30%;
+    height: 40%;
     float: right;
-    margin: 20px;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: fixed;
-    top: 0;
-    left: -250px;
+
+    top: 5%;
+    left: -30%;
     transition: left 0.3s ease;
-    overflow-y: auto;
+
 }
 
 .sidebar:hover {
     left: 0; /* Moves the sidebar into view */
+}
+
+.sidebar-eventlist {
+    overflow-y: auto;
 }
 
 /* Toolbar Styles */
