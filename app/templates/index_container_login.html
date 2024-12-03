@@ -1,4 +1,14 @@
 <!-- index_container_login.html -->
+<script>
+    function setSparkle(event) {
+        event.target.innerText = "Make it sparkle!";
+    }
+
+    function setLogin(event) {
+        event.target.innerText = "Login";
+    }
+</script>
+
 <div class="container container-login">
     <h1 class="team_headline">
         LOG INTO YOUR ACCOUNT
@@ -15,7 +25,7 @@
                 <label for="password" class="credidentials">PASSWORD:</label><br>
                 <input type="password" id="password" name="password" class="input_fields" required><br><br>
             </div>
-            <button type="submit" class="highlight_button make_it_sparkle">MAKE IT SPARKLE</button>
+            <button type="submit" class="highlight_button make_it_sparkle" onmouseover="setSparkle(event)" onmouseleave="setLogin(event)">Login</button>
         </form>
         <p>Don't have an account? <a href="/view/register" class="login_register">Register here</a></p>
     </div>
