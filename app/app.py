@@ -11,13 +11,10 @@ def create_app():
     flaskr = Flask(__name__)
     flaskr.config.from_object('app.config.Config')
 
-    flaskr.config['SECRET_KEY'] = Config.SECRET_KEY
-
-    # Check if SECRET_KEY is loaded correctly
-    print("SECRET_KEY:", flaskr.config['SECRET_KEY'])
-
     flaskr.template_folder = 'templates'
     flaskr.static_folder = 'static'
+
+    flaskr.jinja_env.auto_reload = True
 
     login_manager = LoginManager()
     login_manager.init_app(flaskr)
