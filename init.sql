@@ -17,7 +17,6 @@ CREATE TABLE tbl_events (
     title_short VARCHAR(255) NOT NULL,
     title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
-    is_html BOOLEAN NOT NULL,
     FOREIGN KEY (owner) REFERENCES tbl_users(id)
 );
 
@@ -57,7 +56,6 @@ SELECT
     e.title_short,
     e.title,
     e.description,
-    e.is_html,
     u.username AS owner_username
 FROM
     tbl_events e
@@ -125,20 +123,17 @@ INSERT INTO tbl_users (username, password, role_id) VALUES
 ('user3','scrypt:32768:8:1$pO5ia7ZEv3ffbJAc$ba952a6121b1f2bc45c2eae40ccd979cdd61323e9fbfaaab091f770b96d825e5c0d881a3e5967c0a74a140213a6d32432f3a6afe0a7dcea973399d915f58f308',1)
 ;
 
-INSERT INTO tbl_events (owner, title_short, title, description, is_html) VALUES
+INSERT INTO tbl_events (owner, title_short, title, description) VALUES
 (1, 'Young Clean-Up', 'Urban Clean-Up for Youth',
-'Join us for an exciting Urban Clean-Up event specifically designed for young people in our city. This initiative aims to bring together teenagers and young adults to tackle litter in key areas. Not only will you help beautify the city, but you will also have the chance to meet new friends, learn about environmental sustainability, and contribute to a cleaner, greener urban space. This event includes educational workshops on waste management and recycling, making it both fun and informative. Refreshments and cleanup supplies will be provided. Come and be part of a positive change in our community!',
-false
+'Join us for an exciting Urban Clean-Up event specifically designed for young people in our city. This initiative aims to bring together teenagers and young adults to tackle litter in key areas. Not only will you help beautify the city, but you will also have the chance to meet new friends, learn about environmental sustainability, and contribute to a cleaner, greener urban space. This event includes educational workshops on waste management and recycling, making it both fun and informative. Refreshments and cleanup supplies will be provided. Come and be part of a positive change in our community!'
 ),
 
 (1, 'City Tidy', 'Community Cleaning Project',
-'Get involved in our City Tidy project, a comprehensive cleaning effort targeting multiple city zones. This event is designed for all age groups and focuses on fostering a strong sense of community. We encourage families, groups, and individuals to participate in various cleaning activities such as litter pick-ups, graffiti removal, and park beautification. The day will include activities for kids, informational booths on environmental stewardship, and a community lunch to celebrate our efforts. Join us to make a significant impact on our city’s cleanliness and enjoy a day of teamwork and community spirit.',
-false
+'Get involved in our City Tidy project, a comprehensive cleaning effort targeting multiple city zones. This event is designed for all age groups and focuses on fostering a strong sense of community. We encourage families, groups, and individuals to participate in various cleaning activities such as litter pick-ups, graffiti removal, and park beautification. The day will include activities for kids, informational booths on environmental stewardship, and a community lunch to celebrate our efforts. Join us to make a significant impact on our city’s cleanliness and enjoy a day of teamwork and community spirit.'
 ),
 
 (1, 'Grandma''s Green Initiative', 'Generations Clean-Up',
-'<p><strong>Grandma''s Green Initiative</strong> invites people of all ages to participate in an <em>intergenerational clean-up event</em> aimed at bridging gaps between generations. This unique event encourages families and community members of all ages to come together for a day of cleaning and environmental awareness. Activities include:</p><ul><li>Neighborhood clean-ups</li><li>Educational sessions on sustainable living</li><li>Interactive games for children and seniors</li></ul><p>The event will also feature a <em>storytelling session</em> with our community’s beloved elders sharing their experiences and wisdom. Enjoy a day filled with cooperation, learning, and making a positive impact on our environment.</p>',
-true
+'<p><strong>Grandma''s Green Initiative</strong> invites people of all ages to participate in an <em>intergenerational clean-up event</em> aimed at bridging gaps between generations. This unique event encourages families and community members of all ages to come together for a day of cleaning and environmental awareness. Activities include:</p><ul><li>Neighborhood clean-ups</li><li>Educational sessions on sustainable living</li><li>Interactive games for children and seniors</li></ul><p>The event will also feature a <em>storytelling session</em> with our community’s beloved elders sharing their experiences and wisdom. Enjoy a day filled with cooperation, learning, and making a positive impact on our environment.</p>'
 )
 ;
 

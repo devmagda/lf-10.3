@@ -7,8 +7,45 @@
         <input type="text" id="title" name="title" required><br><br>
         <label for="description">Description:</label><br>
         <textarea id="description" name="description" required></textarea><br><br>
-        <label for="is_html">Is html formatted:</label><br>
-        <input type="checkbox" id="is_html" name="is_html" required><br><br>
+        <input type="hidden" id="is_html" name="is_html" value="false">
         <button type="submit">Create Event</button>
     </form>
+
+    <div class="container-event-preview" id="preview">
+        <h3>Live Preview</h3>
+        <div id="preview-content">Your formatted content will appear here.</div>
+    </div>
+
+    <script>
+        const descriptionInput = document.getElementById('description');
+        const isHtmlCheckbox = document.getElementById('is_html');
+        const previewContent = document.getElementById('preview-content');
+
+        function replaceLinebreaks(content) {
+            return content.replace(/\n/g, '<br>');
+        }
+
+        function isHTML(content) {
+            // Simple regex to detect HTML tags
+            const htmlTagRegex = /<\/?[a-z][\s\S]*>/i;
+            return htmlTagRegex.test(content);
+        }
+
+        function updatePreview() {
+            const content = descriptionInput.value;
+
+            const containsHtml = isHTML(content);
+
+            isHtmlCheckbox.value = containsHtml;
+
+            if (containsHtml) {
+                previewContent.innerHTML = content;
+            } else {
+                previewContent.innerHTML = replaceLinebreaks(content);
+            }
+        }
+
+        descriptionInput.addEventListener('input', updatePreview);
+        isHtmlCheckbox.addEventListener('change', updatePreview);
+    </script>
 </div>

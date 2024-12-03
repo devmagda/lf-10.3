@@ -1,10 +1,104 @@
+:root {
+  /* Text Colors */
+  --text-foreground: #000;   /* Main text color */
+  --text-muted: #666;        /* Muted or secondary text */
+  --text-inverted: #fff;     /* Text on dark backgrounds */
+
+  /* Background Colors */
+  --background: #b7f47d;       /* Main background */
+  --background-muted: #388e3c; /* Light grey for sections */
+  --background-inverted: #222; /* Dark background */
+
+  /* Accent Colors */
+  --primary: #007bff;        /* Primary color (e.g., buttons, links) */
+  --secondary: #6c757d;      /* Secondary accent */
+  --success: #28a745;        /* Success (e.g., alerts) */
+  --warning: #ffc107;        /* Warning (e.g., alerts) */
+  --error: #dc3545;          /* Error/alert color */
+
+  /* Borders and Shadows */
+  --border-color: #ddd;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+
+:root {
+  /* Fonts */
+  --font-family: 'Arial', sans-serif;
+  --font-size-base: 16px;    /* Base font size */
+  --font-size-sm: 14px;      /* Small text */
+  --font-size-lg: 20px;      /* Large text */
+
+  /* Line Heights */
+  --line-height-base: 1.5;
+  --line-height-heading: 1.25;
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+}
+
+:root {
+  /* Spacing Scale */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* Page Padding */
+  --page-padding: var(--spacing-md);
+}
+
+:root {
+  /* Button Sizes */
+  --button-height-sm: 32px;
+  --button-height-md: 40px;
+  --button-height-lg: 48px;
+
+  /* Button Colors */
+  --button-primary-bg: var(--primary);
+  --button-primary-text: var(--text-inverted);
+  --button-hover-bg: #0056b3;
+
+  /* Border Radius */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+}
+
+:root {
+  /* Widths */
+  --max-width-container: 1200px;
+  --sidebar-width: 240px;
+
+  /* Breakpoints */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}
+
+:root {
+  /* Input */
+  --input-padding: var(--spacing-sm);
+  --input-border-color: var(--border-color);
+  --input-border-radius: var(--border-radius-sm);
+
+  /* Focus State */
+  --focus-color: var(--primary);
+  --focus-shadow: 0 0 4px var(--focus-color);
+}
+
+
+
 /* Global Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #b7f47d;
-    color: #000; /* Make all text black */
+    background-color: var(--background);
+    color: var(--text-foreground); /* Make all text black */
     text-rendering: optimizeLegibility; /* Smooth text rendering */
     -webkit-font-smoothing: antialiased; /* Smooth text for WebKit browsers */
     display: flex;
