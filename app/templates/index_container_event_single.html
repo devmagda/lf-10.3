@@ -1,11 +1,7 @@
 <div class="container container-event container-event-single">
     <div class="event-title">{{ focused_event.get_title() }}</div>
     <div class="event-owner">Owner: {{ focused_event.get_owner_username() }}</div>
-    {% if focused_event.is_html_formatted() %}
-        <div class="event-description html-formatted">{{ focused_event.get_description() | safe }}</div>
-    {% else %}
-        <div class="event-description">{{ focused_event.get_description() }}</div>
-    {% endif %}
+    <div class="event-description html-formatted">{{ focused_event.get_description() | safe }}</div>
     <div class="event-subscriptions">
         Subscriptions: {{ focused_event.get_subscriptions() if focused_event.subscriptions else 'No subscriptions' }}
     </div>

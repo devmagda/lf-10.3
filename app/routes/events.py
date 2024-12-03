@@ -1,3 +1,5 @@
+from xmlrpc.client import Boolean
+
 from flask import Blueprint, request, redirect, url_for
 from flask_login import login_required, current_user
 
@@ -44,6 +46,7 @@ def post_comment():
         return str(e), 500
 
 
+
 @events_blueprint.route('/create', methods=['POST'])
 @login_required
 def get_post_create_event():
@@ -52,8 +55,9 @@ def get_post_create_event():
     description = request.form['description']
     is_html = request.form['is_html']
     owner_id = current_user.id
+    formatted_description = EventService.format_description(description, is_html)
 
-    event_id = EventService.create_event(title_short, title, description, is_html, owner_id).get_id()
+    event_id = EventService.create_event(title_short, title, formatted_description, owner_id).get_id()
 
     SessionManager.set_view(View.EVENT_SINGLE)
     SessionManager.set_focused_event_id(event_id)
