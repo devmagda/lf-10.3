@@ -1,20 +1,23 @@
-<div class="container container-event container-event-create">
-    <h2>Create New Event</h2>
-    <form action="/events/create" method="POST">
-        <label for="title_short">Short Title:</label><br>
-        <input type="text" id="title_short" name="title_short" required><br><br>
-        <label for="title">Title:</label><br>
-        <input type="text" id="title" name="title" required><br><br>
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description" required></textarea><br><br>
-        <input type="hidden" id="is_html" name="is_html" value="false">
-        <button type="submit">Create Event</button>
-    </form>
-
-    <div class="container-event-preview" id="preview">
-        <h3>Live Preview</h3>
-        <div id="preview-content">Your formatted content will appear here.</div>
+<div class="container">
+    <h1 class="hometown_sparkle">CREATE YOUR EVENT HERE</h1>
+    <div class="create_event_container">
+        <form action="/events/create" method="POST" class="create_event_form">
+            <h2 class="create_event_sublines">Here you customize your event:</h2>
+            <label for="title_short" class="credidentials">Short Title:</label><br>
+            <input type="text" id="title_short" name="title_short" class="create_event_input" required><br><br>
+            <label for="title" class="credidentials">Title:</label><br>
+            <input type="text" id="title" name="title" class="create_event_input" required><br><br>
+            <label for="description" class="credidentials">Description:</label><br>
+            <textarea id="description" name="description" class="create_event_input create_event_textarea" required></textarea><br><br>
+            <input type="hidden" id="is_html" name="is_html" value="false" class="make_it_sparkle">
+            <button type="submit">Create Event</button>
+        </form>
+        <div class="container_event_preview" id="preview">
+            <h2 class="create_event_sublines">Over here you can preview your customizations:</h2>
+            <div id="preview-content">Your formatted content will appear here.</div>
+        </div>
     </div>
+
 
     <script>
         const descriptionInput = document.getElementById('description');

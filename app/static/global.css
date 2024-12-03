@@ -498,3 +498,32 @@ body {
     font-weight: bold;
     cursor: pointer;
 }
+
+.create_event_container {
+    display: flex;
+    margin: 40px auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+.create_event_form {
+    width: 30%;
+}
+
+.create_event_input {
+    height: 25px;
+    width: 100%;
+}
+
+.create_event_textarea {
+    height: 50%;
+}
+
+.container_event_preview {
+    width: 30%;
+}
+
+.create_event_sublines {
+    padding-bottom: 40px;
+}
