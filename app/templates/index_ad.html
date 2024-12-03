@@ -1,3 +1,17 @@
+<script>
+    function hideAd() {
+        document.querySelector('.ad').style.display = 'none';
+    }
+
+    document.addEventListener('keydown', function (event) {
+        // Check if the key pressed is the 'Esc' key
+        if (event.key === 'Escape') {
+            // Perform the action you want when 'Esc' is pressed
+            hideAd();
+            // You can add more logic here, like closing a modal or navigating away
+        }
+    });
+</script>
 <div class="ad">
     <div class="ad-content">
         <!-- Close button (X) -->
@@ -18,7 +32,5 @@
 
 <script>
     // Function to hide the ad when the 'X' is clicked
-    function hideAd() {
-        document.querySelector('.ad').style.display = 'none';
-    }
+
 </script>
