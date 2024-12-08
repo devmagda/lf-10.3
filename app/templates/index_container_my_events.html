@@ -1,10 +1,11 @@
-<div class="container container-my-events">
+
+<h1 class="headline yellow_headline text_center">CHECK OUT YOUR EVENTS</h1>
     {% if my_events %}
         {% for event in my_events %}
             <div class="event">
-                <h2><a href="{{ url_for('events.get_event', event_id=event.get_id()) }}">{{ event.get_title() }}</a></h2>
-                <form action="{{ url_for('events.get_event', event_id=event.get_id()) }}" method="POST">
-                    <button type="submit">View Event</button>
+                <h2><a class="my_events_titles white_font" href="{{ url_for('events.get_event', event_id=event.get_id()) }}">{{ event.get_title() }}</a></h2>
+                <form action="{{ url_for('events.get_event', event_id=event.get_id()) }}" method="POST" class="view_event">
+                    <button type="submit" class="highlight_button">View Event</button>
                 </form>
             </div>
             <hr>
@@ -15,4 +16,3 @@
             Create one <a href="/view/event-create">here</a>.
         </p>
     {% endif %}
-</div>

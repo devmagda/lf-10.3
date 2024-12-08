@@ -1,7 +1,7 @@
-<div class="container">
-    <h1 class="hometown_sparkle">CREATE YOUR EVENT HERE</h1>
+
+    <h1 class="headline yellow_headline text_center">CREATE YOUR EVENT HERE</h1>
     <div class="create_event_container">
-        <form action="/events/create" method="POST" class="create_event_form">
+        <form action="/events/create" method="POST" class="create_event_form width_30_percent">
             <h2 class="create_event_sublines">Here you customize your event:</h2>
             <label for="title_short" class="credidentials">Short Title:</label><br>
             <input type="text" id="title_short" name="title_short" class="create_event_input" required><br><br>
@@ -10,13 +10,13 @@
             <label for="description" class="credidentials">Description:</label><br>
             <textarea id="description" name="description" class="create_event_input create_event_textarea" required></textarea><br><br>
             <input type="hidden" id="is_html" name="is_html" value="false" class="make_it_sparkle">
-            <button type="submit">Create Event</button>
+            <button type="submit" class="highlight_button submit_button">Create Event</button>
         </form>
-        <div class="container_event_preview" id="preview">
+        <div class="width_30_percent" id="preview">
             <h2 class="create_event_sublines">Over here you can preview your customizations:</h2>
-            <div id="preview-content">Your formatted content will appear here.</div>
+            <div id="preview-content" class="white_font">Your formatted content will appear here.</div>
         </div>
-    </div>
+
 
 
     <script>

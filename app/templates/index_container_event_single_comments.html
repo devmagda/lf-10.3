@@ -1,20 +1,32 @@
-<div class="container container-event container-event-single container-event-single-comments">
-    <form action="/events/comment" method="POST">
-        <input type="hidden" id="event_id" name="event_id" value="{{ focused_event.get_id() }}">
-        <textarea id="comment" name="comment" placeholder="Write your comment here..." rows="4" required></textarea>
-        <button type="submit">Add Comment</button>
-    </form>
+<div class="comment_section">
+    <h2 class="yellow_headline">COMMENTS</h2>
+    <p class="header_subline margin_0">
+        This is what people have to say about this event. <br>
+        Comments are monitored.
+    </p>
 
-    <div class="comment-list">
+    <div class="comment_list">
         {% if focused_event.get_comments() and focused_event.has_comments()%}
             {% for comment in focused_event.get_comments() %}
                 <div class="comment">
-                    <p><strong>{{ comment.get_username() }}</strong> says:</p>
-                    <p>{{ comment.get_comment() }}</p>
+                    <p class="margin_0"><strong>{{ comment.get_username() }}</strong> says:</p>
+                    <p class="margin_top_0">{{ comment.get_comment() }}</p>
                 </div>
             {% endfor %}
         {% else %}
             <p>No comments available.</p>
         {% endif %}
     </div>
+
+    <hr>
+
+    <p class="comment_warning margin_0">
+        Please remain kind and respectful.
+    </p>
+    <form action="/events/comment" method="POST" class="margin_top_0">
+        <input type="hidden" id="event_id" name="event_id" value="{{ focused_event.get_id() }}">
+        <textarea id="comment" name="comment" class="comment_description" placeholder="Write your comment here..." rows="4" required></textarea>
+        <br>
+        <button type="submit" class="highlight_button add_comment">Add Comment</button>
+    </form>
 </div>

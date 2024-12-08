@@ -9,25 +9,24 @@
     }
 </script>
 
-<div class="container container-login">
-    <h1 class="team_headline">
-        LOG INTO YOUR ACCOUNT
-        <br>
-        AND START CLEANING
-    </h1>
-    <div class="login_container">
-        <form action="/login" method="POST">
-            <div class="login_form_container">
-                <label for="username" class="credidentials">USERNAME:</label><br>
-                <input type="text" id="username" name="username" class="input_fields" required><br><br>
-            </div>
-            <div class="login_form_container">
-                <label for="password" class="credidentials">PASSWORD:</label><br>
-                <input type="password" id="password" name="password" class="input_fields" required><br><br>
-            </div>
-            <button type="submit" class="highlight_button make_it_sparkle" onmouseover="setSparkle(event)" onmouseleave="setLogin(event)">Login</button>
-        </form>
-        <p>Don't have an account? <a href="/view/register" class="login_register">Register here</a></p>
-    </div>
+
+<h1 class="team_headline white_font text_center">
+    LOG INTO YOUR ACCOUNT
+    <br>
+    AND <a class="yellow_headline">START CLEANING</a>
+</h1>
+<div class="login_container text_center">
+    <form action="/login" method="POST">
+        <div class="login_form_container text_center">
+            <label for="username" class="credidentials">USERNAME:</label><br>
+            <input type="text" id="username" name="username" class="input_fields" required><br><br>
+        </div>
+        <div class="login_form_container text_center">
+            <label for="password" class="credidentials">PASSWORD:</label><br>
+            <input type="password" id="password" name="password" class="input_fields" required><br><br>
+        </div>
+        <button type="submit" class="highlight_button make_it_sparkle" onmouseover="setSparkle(event)" onmouseleave="setLogin(event)">Login</button>
+    </form>
+    <p>Don't have an account? <a href="/view/register" class="login_register">Register here</a></p>
 </div>
 
