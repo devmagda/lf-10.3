@@ -21,9 +21,6 @@
     <form action="{{ url_for('views.set_view', view_name='login') }}" method="POST">
         <button type="submit">Login</button>
     </form>
-    <form action="{{ url_for('views.set_view', view_name='register') }}" method="POST">
-        <button type="submit">Register</button>
-    </form>
     {% endif %}
 
     <!-- Logout button, visible to all users except guests -->
