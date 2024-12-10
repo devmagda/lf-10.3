@@ -118,6 +118,10 @@ hr {
     text-decoration: none;
 }
 
+.container {
+    flex: 1;
+}
+
 .white_font {
     color: white;
 }
