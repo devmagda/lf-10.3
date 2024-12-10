@@ -1,4 +1,4 @@
-<div class="event_detail_container">
+<div class="event_detail_container pb_container">
     <div class="event_detail">
         <div class="event_title text_center">{{ focused_event.get_title() }}</div>
         <div class="event_description html-formatted">{{ focused_event.get_description() | safe }}</div>
@@ -9,7 +9,7 @@
 
         <form action="/events/subscribe" method="POST">
             <input type="hidden" id="event_id" name="event_id" value="{{ focused_event.get_id() }}">
-            <button type="submit" class="highlight_button submit_button">Surbscibe</button>
+            <button type="submit" class="highlight_button submit_button pointercursor">Surbscibe</button>
         </form>
     </div>
     {% include 'index_container_event_single_comments.html' %}

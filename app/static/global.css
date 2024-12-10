@@ -116,7 +116,6 @@ hr {
     border-radius: 15px;
     padding: 10px 18px 10px 18px;
     text-decoration: none;
-    cursor: pointer;
 }
 
 .white_font {
@@ -173,12 +172,20 @@ hr {
     padding-bottom: 8.5em;
 }
 
+.pb_container {
+    padding-bottom: 179px;
+}
+
 .text_center {
     text-align: center;
 }
 
 .text_right {
     text-align: right;
+}
+
+.pointercursor {
+    cursor: pointer;
 }
 
 
@@ -198,7 +205,7 @@ body {
 
 /* Footer Styles */
 .footer {
-    background-color: #388e3c; /* Green background for the footer */
+    background-color: var(--darker);
     color: #fff; /* White text for footer */
     padding: 2em 3em;
     display: flex;
@@ -249,7 +256,6 @@ body {
     color: white;
     border: none;
     font-size: 1em;
-    cursor: pointer;
     position: relative;
     margin-bottom: 5px;
     margin-top: 5px;
@@ -368,7 +374,6 @@ body {
     right: 10px;
     font-size: 20px;
     color: #388e3c;
-    cursor: pointer;
     font-weight: bold;
 }
 
@@ -559,7 +564,6 @@ body {
 .make_it_sparkle {
     font-size: 1.25em;
     font-weight: bold;
-    cursor: pointer;
     width: 30%;
 }
 
