@@ -4,7 +4,14 @@
             <p class="header_subline">
                 Grab your gloves, join the squad, and let’s turn trash into treasure by giving our local environment a glow-up! After the hard work, kick back with the crew, swap cleanup stories, and celebrate like eco-champions!
             </p>
-            <a class="purple_button pointercursor" href="index_container_my_events.html">Get Started</a>
+            {% if logged_in %}
+                <a class="purple_button pointercursor" href="{{ url_for('views.set_view', view_name='event-create') }}">Get Started</a>
+
+            {% else %}
+                <a class="purple_button pointercursor" href="{{ url_for('views.set_view', view_name='register') }}">Get Started</a>
+
+            {% endif %}
+
         </div>
         <div>
             <img src="../static/content/cleaning_art.png">
