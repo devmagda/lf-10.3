@@ -11,7 +11,9 @@
     {% include 'index_toolbar_buttons.html' %}
 
     {% include 'index_container.html' %}
-    {% include 'index_sidebar.html' %}
+    {% if logged_in %}
+        {% include 'index_sidebar.html' %}
+    {% endif %}
     {% include 'index_footer.html' %}
 
 </body>
