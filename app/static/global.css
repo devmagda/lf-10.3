@@ -110,8 +110,20 @@ hr {
     width: 50%;
 }
 
+.padding-small {
+    padding: 3rem;
+}
+
 .purple_button {
     background-color: var(--purple);
+    color: white;
+    border-radius: 15px;
+    padding: 10px 18px 10px 18px;
+    text-decoration: none;
+}
+
+.red_button {
+    background-color: var(--orange);
     color: white;
     border-radius: 15px;
     padding: 10px 18px 10px 18px;
@@ -423,7 +435,6 @@ body {
 .headline {
     font-size: 4em;
     font-weight: bold;
-    padding-top: 0.5em;
 }
 
 .cleancity_together {
@@ -555,6 +566,13 @@ body {
     justify-content: center;
 }
 
+.create_event_label {
+    margin-top: 5px;
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: left;
+}
+
 .input_fields {
     height: 17px;
     width: 200px;
@@ -573,33 +591,34 @@ body {
 
 .create_event_container {
     display: flex;
-    margin: 90px auto 40px auto;
+    margin: 0 auto 40px auto;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-around;
 }
 
 .create_event_form {
-    margin-bottom: 8em;
+    display: flex;
+    flex-direction: column;
 }
 
 .create_event_input {
     height: 25px;
-    width: 100%;
+    width: calc(100% - 8px);
     border-radius: 5px;
 }
 
 .create_event_textarea {
-    height: 50%;
-}
-
-.create_event_sublines {
-    padding-bottom: 40px;
+    flex-grow: 1;
+    height: 100%;
+    resize: vertical;
+    min-height: 150px;
 }
 
 .submit_button {
     margin-top: 1em;
-    margin-bottom: 6em;
+    margin-bottom: 1em;
+    width: 100%;
 }
 
 .my_events_titles {
