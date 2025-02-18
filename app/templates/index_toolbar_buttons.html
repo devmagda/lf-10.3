@@ -4,12 +4,15 @@
         <button type="submit" class="highlight_button">Home</button>
     </form>
     {% if role == 3 or role == 2 %} <!-- Admin and Creator roles -->
-    <form action="{{ url_for('views.set_view', view_name='event-create') }}" method="POST">
-        <button type="submit">Create Event</button>
-    </form>
-    <form action="{{ url_for('views.set_view', view_name='my-events') }}" method="POST">
-        <button type="submit">My Events</button>
-    </form>
+        <form action="{{ url_for('views.set_view', view_name='event-create') }}" method="POST">
+            <button type="submit">Create Event</button>
+        </form>
+        <form action="{{ url_for('views.set_view', view_name='event-editor') }}" method="POST">
+            <button type="submit">Event Editor</button>
+        </form>
+        <form action="{{ url_for('views.set_view', view_name='my-events') }}" method="POST">
+            <button type="submit">My Events</button>
+        </form>
     {% endif %}
 
     <!-- Common buttons for all users -->
@@ -18,15 +21,15 @@
     </form>
 
     {% if role == 0 %} <!-- Guest role -->
-    <form action="{{ url_for('views.set_view', view_name='login') }}" method="POST">
-        <button type="submit">Login</button>
-    </form>
+        <form action="{{ url_for('views.set_view', view_name='login') }}" method="POST">
+            <button type="submit">Login</button>
+        </form>
     {% endif %}
 
     <!-- Logout button, visible to all users except guests -->
     {% if role != 0 %}
-    <form action="{{ url_for('auth.logout') }}" method="POST">
-        <button type="submit">Logout</button>
-    </form>
+        <form action="{{ url_for('auth.logout') }}" method="POST">
+            <button type="submit">Logout</button>
+        </form>
     {% endif %}
 </div>

@@ -20,6 +20,8 @@
         {% include 'index_container_my_events.html' %}
     {% elif view == 'TEAM' %}
         {% include 'index_container_team.html' %}
+    {% elif view == 'EVENT_EDITOR' %}
+        {% include 'index_container_event_editor.html' %}
     {% else %}
         <p>Select a view from the toolbar.</p>
     {% endif %}

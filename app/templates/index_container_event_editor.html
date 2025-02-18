@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='editor.css') }}">
+<script src="{{ url_for('static', filename='editor.js') }}"></script>
+<script>
+    const editor = new Editor();
+
+    editor.doStuff();
+    console.log("wtf");
+</script>
+
+<div class="editor_container_fixed">
+    <div class="editor_container rounded-single">
+        <div class="editor_toolbar rounded dark_green_bg">
+            <div id="toolbar"></div>
+        </div>
+        <div class="editor_main rounded dark_green_bg">
+            <div id="content"></div>
+        </div>
+        <div class="editor_settings rounded dark_green_bg">
+            <div id="settings"></div>
+        </div>
+
+    </div>
+</div>

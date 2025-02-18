@@ -12,3 +12,4 @@ class View(Enum):
     EVENT_SINGLE: str = 'single-event'
     EVENT_CREATE: str = 'event-create'
     MY_EVENTS: str = 'my-events'
+    EVENT_EDITOR: str = 'event-editor'

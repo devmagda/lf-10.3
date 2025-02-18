@@ -1,0 +1,36 @@
+
+
+div {
+}
+
+.editor_container_fixed {
+    height: 95vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.editor_container {
+    background-color: var(--secondary);
+    margin: 2vh;
+    height: calc(95vh - 2vh - 2vh);
+    width: calc(100vw - 2.5vw);
+    display: flex;
+    flex-direction: row;
+}
+
+.editor_toolbar {
+    width: 20%;
+    background-color: var(--third);
+}
+
+.editor_main {
+    flex: 1;
+    background-color: var(--third);
+
+}
+
+.editor_settings {
+    width: 20%;
+    background-color: var(--third);
+    margin-right: 1vh;
+}

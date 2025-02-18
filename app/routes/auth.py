@@ -55,5 +55,5 @@ def register():
 def logout():
     logout_user()
     SessionManager.set_user_role(UserRole.GUEST)
-    SessionManager.set_view(View.HOME)
+    SessionManager.set_view(View.LOGIN)
     return redirect(url_for('global.index'))
