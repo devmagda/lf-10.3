@@ -1,6 +1,6 @@
 
-
 div {
+
 }
 
 .editor_container_fixed {
@@ -21,11 +21,59 @@ div {
 .editor_toolbar {
     width: 20%;
     background-color: var(--third);
+    flex-direction: column;
+    display: flex;
+
+    .toolbar-components {
+        border: 1px solid black;
+        max-height: 40vh;
+        overflow: scroll;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        ul.component-template-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+                div {
+                    padding: 15px;
+                    border-bottom: 1px solid black;
+                }
+            }
+        }
+    }
+
+    .components-list {
+        border: 1px solid black;
+        flex: 1;
+    }
 }
 
 .editor_main {
     flex: 1;
     background-color: var(--third);
+
+    table {
+        width: 100%;
+        height: 100%;
+        border-collapse: collapse;
+        table-layout: fixed; /* Forces equal column width distribution */
+
+        tr {
+            width: 100%;
+            height: 100%;
+
+            td {
+                width: 100%;
+                height: 100%;
+                white-space: nowrap;
+                word-wrap: break-word;
+                vertical-align: top;
+            }
+        }
+    }
 
 }
 
@@ -33,4 +81,10 @@ div {
     width: 20%;
     background-color: var(--third);
     margin-right: 1vh;
+}
+
+.component-container {
+    border: 1px dashed #000;
+    padding: 10px;
+    min-height: 50px;
 }
