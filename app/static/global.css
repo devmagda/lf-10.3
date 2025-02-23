@@ -1,98 +1,98 @@
 :root {
-  /* Text Colors */
-  --text-foreground: #000;   /* Main text color */
-  --text-muted: #666;        /* Muted or secondary text */
-  --text-inverted: #fff;     /* Text on dark backgrounds */
+    /* Text Colors */
+    --text-foreground: #000; /* Main text color */
+    --text-muted: #666; /* Muted or secondary text */
+    --text-inverted: #fff; /* Text on dark backgrounds */
 
-  /* Background Colors */
-  --background: #7CA37DFF;       /* Main background */
-  --background-muted: #388e3c; /* Light grey for sections */
-  --background-inverted: #222; /* Dark background */
+    /* Background Colors */
+    --background: #7CA37DFF; /* Main background */
+    --background-muted: #388e3c; /* Light grey for sections */
+    --background-inverted: #222; /* Dark background */
 
-  /* Accent Colors */
-  --primary: #007bff;        /* Primary color (e.g., buttons, links) */
-  --secondary: #6c757d;      /* Secondary accent */
-  --third: #bfbfbf;
-  --success: #28a745;        /* Success (e.g., alerts) */
-  --warning: #ffc107;        /* Warning (e.g., alerts) */
-  --error: #dc3545;          /* Error/alert color */
-  --darker: #5b785b;
-  --purple: #5E2B63FF;
-  --lighter: #9dcd9e;
-  --lightPurple: #B599C2FF;
-  --orange : #EE7654FF;
+    /* Accent Colors */
+    --primary: #007bff; /* Primary color (e.g., buttons, links) */
+    --secondary: #6c757d; /* Secondary accent */
+    --third: #bfbfbf;
+    --success: #28a745; /* Success (e.g., alerts) */
+    --warning: #ffc107; /* Warning (e.g., alerts) */
+    --error: #dc3545; /* Error/alert color */
+    --darker: #5b785b;
+    --purple: #5E2B63FF;
+    --lighter: #9dcd9e;
+    --lightPurple: #B599C2FF;
+    --orange: #EE7654FF;
 
-  /* Borders and Shadows */
-  --border-color: #ddd;
-  --shadow-color: rgba(0, 0, 0, 0.1);
+    /* Borders and Shadows */
+    --border-color: #ddd;
+    --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 
 :root {
-  /* Fonts */
-  --font-family: 'Arial', sans-serif;
-  --font-size-base: 16px;    /* Base font size */
-  --font-size-sm: 14px;      /* Small text */
-  --font-size-lg: 20px;      /* Large text */
+    /* Fonts */
+    --font-family: 'Arial', sans-serif;
+    --font-size-base: 16px; /* Base font size */
+    --font-size-sm: 14px; /* Small text */
+    --font-size-lg: 20px; /* Large text */
 
-  /* Line Heights */
-  --line-height-base: 1.5;
-  --line-height-heading: 1.25;
+    /* Line Heights */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.25;
 
-  /* Font Weights */
-  --font-weight-regular: 400;
-  --font-weight-bold: 700;
+    /* Font Weights */
+    --font-weight-regular: 400;
+    --font-weight-bold: 700;
 }
 
 :root {
-  /* Spacing Scale */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
+    /* Spacing Scale */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
 
-  /* Page Padding */
-  --page-padding: var(--spacing-md);
+    /* Page Padding */
+    --page-padding: var(--spacing-md);
 }
 
 :root {
-  /* Button Sizes */
-  --button-height-sm: 32px;
-  --button-height-md: 40px;
-  --button-height-lg: 48px;
+    /* Button Sizes */
+    --button-height-sm: 32px;
+    --button-height-md: 40px;
+    --button-height-lg: 48px;
 
-  /* Button Colors */
-  --button-primary-bg: var(--primary);
-  --button-primary-text: var(--text-inverted);
-  --button-hover-bg: #0056b3;
+    /* Button Colors */
+    --button-primary-bg: var(--primary);
+    --button-primary-text: var(--text-inverted);
+    --button-hover-bg: #0056b3;
 
-  /* Border Radius */
-  --border-radius-sm: 4px;
-  --border-radius-md: 8px;
-  --border-radius-lg: 12px;
+    /* Border Radius */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
 }
 
 :root {
-  /* Widths */
-  --max-width-container: 1200px;
+    /* Widths */
+    --max-width-container: 1200px;
 
-  /* Breakpoints */
-  --breakpoint-sm: 576px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 992px;
-  --breakpoint-xl: 1200px;
+    /* Breakpoints */
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
 }
 
 :root {
-  /* Input */
-  --input-padding: var(--spacing-sm);
-  --input-border-color: var(--border-color);
-  --input-border-radius: var(--border-radius-sm);
+    /* Input */
+    --input-padding: var(--spacing-sm);
+    --input-border-color: var(--border-color);
+    --input-border-radius: var(--border-radius-sm);
 
-  /* Focus State */
-  --focus-color: var(--primary);
-  --focus-shadow: 0 0 4px var(--focus-color);
+    /* Focus State */
+    --focus-color: var(--primary);
+    --focus-shadow: 0 0 4px var(--focus-color);
 }
 
 hr {
@@ -138,7 +138,7 @@ hr {
 }
 
 .dark_green_bg {
-   background-color: var(--lighter);
+    background-color: var(--lighter);
 }
 
 .background {
@@ -276,22 +276,23 @@ body {
     margin-top: 5px;
 }
 
-.sidebar_buttons:after{
-  content: '';
-  position: absolute;
-  width: 0; height: 3px;
-  display: block;
-  margin-top: 5px;
-  right: 0;
-  background: #fff;
-  transition: width .5s ease;
-  -webkit-transition: width .5s ease;
+.sidebar_buttons:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: #fff;
+    transition: width .5s ease;
+    -webkit-transition: width .5s ease;
 }
 
-.sidebar_buttons:hover:after{
-  width: 100%;
-  left: 0;
-  background: #fff;
+.sidebar_buttons:hover:after {
+    width: 100%;
+    left: 0;
+    background: #fff;
 }
 
 /* Toolbar Styles */
@@ -468,31 +469,28 @@ body {
 .huge_1 {
     font-size: 8em;
     color: #ffeb3b;
-    text-shadow:
-        3px 3px 2px #000,
-        -3px 3px 2px #000,
-        -3px -3px 0 #000,
-        3px -3px 0 #000;
+    text-shadow: 3px 3px 2px #000,
+    -3px 3px 2px #000,
+    -3px -3px 0 #000,
+    3px -3px 0 #000;
 }
 
 .huge_2 {
     font-size: 8em;
     color: #F3BABA;
-    text-shadow:
-        3px 3px 2px #000,
-        -3px 3px 2px #000,
-        -3px -3px 0 #000,
-        3px -3px 0 #000;
+    text-shadow: 3px 3px 2px #000,
+    -3px 3px 2px #000,
+    -3px -3px 0 #000,
+    3px -3px 0 #000;
 }
 
 .huge_3 {
     font-size: 8em;
     color: #89CFF0;
-    text-shadow:
-        3px 3px 2px #000,
-        -3px 3px 2px #000,
-        -3px -3px 0 #000,
-        3px -3px 0 #000;
+    text-shadow: 3px 3px 2px #000,
+    -3px 3px 2px #000,
+    -3px -3px 0 #000,
+    3px -3px 0 #000;
 }
 
 .card_headline {
@@ -521,10 +519,16 @@ body {
 }
 
 .team_image {
-    width:50%;
-    height:auto;
+    width: 50%;
+    height: auto;
     border-radius: 10px;
     border: 2px solid black;
+}
+
+.unlisted {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 .team_text_container {
@@ -543,6 +547,10 @@ body {
     flex-direction: column;
     flex-wrap: nowrap;
     padding-top: 50px;
+}
+
+.hidden {
+    display: none;
 }
 
 .login_register {

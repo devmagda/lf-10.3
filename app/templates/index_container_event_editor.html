@@ -1,23 +1,22 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='editor.css') }}">
 <script type="module" src="{{ url_for('static', filename='editor.js') }}"></script>
-<script type="module">
-    import {Editor, Toast} from "{{ url_for('static', filename='editor.js') }}";
-
-    const editor = new Editor();
-</script>
-
 
 <div class="editor_container_fixed">
     <div class="editor_container rounded-single">
         <div class="editor_toolbar rounded dark_green_bg">
             <div id="toolbar" class="toolbar-components">
-                <ul id="component-template-list" class="component-template-list">
+                <ul id="component-template-list" class="component-template-list unlisted">
                 </ul>
             </div>
 
             <div class="toolbar-components">
-                <ul id="component-list" class="component-template-list">
+                <ul id="component-list" class="component-template-list unlisted">
                 </ul>
+            </div>
+            <div class="toolbar-submit-button">
+                <button class="highlight_button submit_button pointercursor" id="show-submit">
+                    Create Event
+                </button>
             </div>
         </div>
         <div class="editor_main rounded dark_green_bg">
@@ -25,10 +24,40 @@
         </div>
         <div class="editor_settings rounded dark_green_bg">
             <div id="settings">
-                <ul id="settings-list" class="component-template-list">
+                <ul id="settings-list" class="component-template-list unlisted">
                 </ul>
             </div>
         </div>
 
     </div>
 </div>
+
+<div class="editor-submit-event hidden" id="editor-submit-dialog">
+    <form action="/events/create" method="POST" class="create_event_form width_30_percent">
+        <h2 class="create_event_sublines">Here you customize your event:</h2>
+        <label for="title_short" class="credidentials">Short Title:</label><br>
+        <input type="text" id="title_short" name="title_short" class="create_event_input" required><br><br>
+        <label for="title" class="credidentials">Title:</label><br>
+        <input type="text" id="title" name="title" class="create_event_input" required><br><br>
+        <label for="description" class="credidentials">Description:</label><br>
+        <textarea id="description" name="description" class="create_event_input create_event_textarea"></textarea><br><br>
+        <input type="hidden" id="is_html" name="is_html" value="false" class="make_it_sparkle pointercursor">
+        <button type="submit" class="highlight_button submit_button pointercursor">Create Event</button>
+        <button class="submit_button pointercursor" id="hide-submit">Abort</button>
+    </form>
+</div>
+
+<script type="module">
+    import {Editor, Toast} from "{{ url_for('static', filename='editor.js') }}";
+    const editor = new Editor();
+    const showSubmitButton = document.getElementById('show-submit');
+    const hideSubmitButton = document.getElementById('hide-submit');
+    const inputDescription = document.getElementById('description');
+
+    showSubmitButton.addEventListener('click', editor.onClickSubmitEvent());
+    showSubmitButton.addEventListener('click', editor.onClickUpdateSubmitDescription(inputDescription));
+
+    hideSubmitButton.onclick = editor.onClickHideEvent();
+
+
+</script>
