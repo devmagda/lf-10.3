@@ -20,6 +20,11 @@
             </div>
         </div>
         <div class="editor_main rounded dark_green_bg">
+            <div id="history-toolbar">
+                <button class="history-button" id="history-undo"><</button>
+                <button class="history-button" id="history-redo">></button>
+                <button class="history-button" id="history-save">Save</button>
+            </div>
             <div id="content"></div>
         </div>
         <div class="editor_settings rounded dark_green_bg">
@@ -50,12 +55,21 @@
 <script type="module">
     import {Editor, Toast} from "{{ url_for('static', filename='editor.js') }}";
     const editor = new Editor();
+    editor.overrideKeyBinds();
     const showSubmitButton = document.getElementById('show-submit');
     const hideSubmitButton = document.getElementById('hide-submit');
     const inputDescription = document.getElementById('description');
+    const undoButton = document.getElementById('history-undo');
+    const redoButton = document.getElementById('history-redo');
+    const saveButton = document.getElementById('history-save');
 
     showSubmitButton.addEventListener('click', editor.onClickSubmitEvent());
     showSubmitButton.addEventListener('click', editor.onClickUpdateSubmitDescription(inputDescription));
+
+    undoButton.onclick = editor.onClickUndo();
+    redoButton.onclick = editor.onClickRedo();
+    saveButton.onclick = editor.eventListenerSave();
+
 
     hideSubmitButton.onclick = editor.onClickHideEvent();
 

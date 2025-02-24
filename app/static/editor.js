@@ -5,7 +5,7 @@ export const CONTAINER = {
     style: "",
     isContainer: true,
     defaultStyling: {
-        minHeight: '5vh',
+        minHeight: '10vh',
         padding: "0px",
         margin: '0px',
     },
@@ -19,6 +19,10 @@ export const CONTAINER = {
     getSettingsForm: (component) => {
         const form = Components.createDefaultSettingsForm(component, CONTAINER.title);
         return form;
+    },
+    applyDropzone: (component) => {
+        component.ondrop = Components.onDrop(component.id);
+        component.ondragover = Components.onDragOver();
     }
 };
 
@@ -41,7 +45,7 @@ export const GRID = {
         table.dataset.cols = 2;
 
         // Create grid with default 2 rows and 2 columns
-        Components.createGrid(table, 2, 2);
+        Components.createGrid(id, table, 2, 2);
 
         // Set the default styling for the table
         for (let [key, value] of Object.entries(GRID.defaultStyling)) {
@@ -62,6 +66,21 @@ export const GRID = {
         });
         form.append(rowsInput, colsInput);
         return form;
+    },
+    applyDropzone: (component) => {
+        const childDropzones = component.querySelectorAll(`[data-parent-id="${component.id}"]`);
+        if (childDropzones) {
+            childDropzones.forEach(dz => {
+                dz.ondrop = Components.onDrop(dz.id);
+                dz.ondragover = Components.onDragOver();
+            });
+        }
+    },
+    onDragOver: (component) => {
+        component.ondragover = Components.onDragOver();
+    },
+    onDrop: (component) => {
+        component.ondrop = Components.onDrop(component.id);
     }
 };
 
@@ -114,58 +133,6 @@ export const TEXT = {
             component.innerHTML = val.replace(/\n/g, '<br>');
         });
         form.appendChild(textarea);
-        return form;
-    }
-};
-
-export const LIST = {
-    title: "List",
-    description: "An unordered list with customizable items and dot visibility.",
-    prefix: "list",
-    style: "",
-    isContainer: false,
-    defaultStyling: {
-        listStyleType: "disc",
-        padding: "10px"
-    },
-    getContent: (id) => {
-        const ul = document.createElement('ul');
-        ul.id = id;
-        const addItemLi = document.createElement('li');
-        ul.appendChild(addItemLi);
-        const addItemDiv = Components.createDiv();
-        addItemDiv.style.textAlign = 'center';
-        addItemLi.appendChild(addItemDiv);
-        addItemDiv.textContent = "+";
-        addItemDiv.onclick = (event) => {
-            const innerId = Components.getUniqueId(LIST);
-            const newLi = document.createElement('li');
-            const inner = document.createElement('div');
-            Components.addDefaultStyling(inner, CONTAINER.defaultStyling);
-            newLi.ondragover = Components.onDragOver();
-            newLi.ondrop = Components.onDrop(innerId);
-            inner.id = innerId;
-            inner.classList.add('editor-outline');
-            newLi.appendChild(inner);
-            const lastChild = ul.lastElementChild;
-            ul.insertBefore(newLi, lastChild);
-        };
-        ul.style.listStyleType = 'disc';
-        return ul;
-    },
-    getSettingsForm: (component) => {
-        const form = Components.createDefaultSettingsForm(component, LIST.title);
-        const dotToggle = Components.createCheckbox("Hide bullet points", false, (checked) => {
-            component.style.listStyleType = checked ? 'none' : 'disc';
-            if (checked) {
-                component.classList.add('unlisted');
-                component.style.listStyleType = 'none';
-            } else {
-                component.classList.remove('unlisted');
-                component.style.listStyleType = 'disc';
-            }
-        });
-        form.appendChild(dotToggle);
         return form;
     }
 };
@@ -246,7 +213,6 @@ class Components {
                 [GRID.prefix, GRID],
                 [TITLE.prefix, TITLE],
                 [TEXT.prefix, TEXT],
-                [LIST.prefix, LIST],
                 [LINK.prefix, LINK],
                 [IMAGE.prefix, IMAGE]
             ]);
@@ -314,7 +280,7 @@ class Components {
         }
     }
 
-    static createGrid(table, rows, cols) {
+    static createGrid(parentId, table, rows, cols) {
         table.innerHTML = "";
         for (let i = 0; i < rows; i++) {
             const tr = document.createElement('tr');
@@ -323,10 +289,9 @@ class Components {
                 const id = Components.getUniqueId(GRID) + "_td";
                 const inner = document.createElement('div');
                 Components.addDefaultStyling(inner, CONTAINER.defaultStyling);
-                inner.ondragover = Components.onDragOver();
-                inner.ondrop = Components.onDrop(id);
                 inner.id = id;
                 inner.classList.add('editor-outline');
+                inner.dataset.parentId = parentId;
 
                 td.appendChild(inner);
 
@@ -404,7 +369,6 @@ class Components {
                 }
             } else {
                 Toast.error("Could not create Component. Please see logs for details!");
-                console.log("EVENT: ", event);
             }
         }
     }
@@ -422,7 +386,6 @@ class Components {
 
     static deleteComponent(id) {
         const deletionTargets = Components.getElementsById(id);
-        console.log('deletionTargets', deletionTargets);
         deletionTargets.forEach(t => t.remove());
     }
 
@@ -498,6 +461,66 @@ class Components {
     }
 }
 
+class History {
+    constructor(historyBuffer = 10) {
+        this.historyBuffer = historyBuffer;
+        this.historyList = [];
+        this.currentIndex = 0;
+    }
+
+    save(newContent, passive) {
+        if (newContent === this.getCurrent()) {
+            Toast.info('No changes detected, not saving to history.');
+            return;
+        }
+
+        if (!passive) {
+            Toast.info('Saving current progres to history.');
+        }
+
+        if (this.currentIndex !== this.historyList.length - 1) {
+            this.historyList = this.historyList.slice(0, this.currentIndex + 1);
+        }
+
+        this.historyList.push(newContent);
+
+        if (this.historyList.length > this.historyBuffer) {
+            this.historyList.shift();
+        }
+
+        this.currentIndex = this.historyList.length - 1;
+    }
+
+    undo() {
+        if (this.currentIndex > 0) {
+            Toast.info('Undoing last step ..');
+            this.currentIndex--;
+        } else {
+            Toast.info('There was nothing to undo!');
+        }
+
+        return this.historyList[this.currentIndex];
+    }
+
+    redo() {
+        if (this.currentIndex < this.historyList.length - 1) {
+            Toast.info('Redoing step ..');
+            this.currentIndex++;
+        } else {
+            Toast.info('Nothing to redo!')
+        }
+
+        return this.historyList[this.currentIndex];
+    }
+
+    getCurrent() {
+        if (this.currentIndex === 0) {
+            return undefined;
+        }
+        return this.historyList[this.currentIndex];
+    }
+}
+
 export class Editor {
     static #instance;
 
@@ -506,15 +529,15 @@ export class Editor {
             return Editor.#instance; // Return existing instance if already created
         }
 
-        this.componentList = [];
-
+        this.history = new History(50);
 
         Components.getComponents().forEach(c => this.addComponentTemplate(c));
-
-        this.componentList.push(Components.fromTemplate(CONTAINER, 'content'));
-
         this.addComponent(Components.fromTemplate(CONTAINER, 'content'));
         Editor.#instance = this; // Store the instance
+    }
+
+    getHistory() {
+        return this.history;
     }
 
     static getInstance() {
@@ -556,8 +579,64 @@ export class Editor {
         }
     }
 
+    onClickUndo() {
+        return () => {
+            this.undo();
+        };
+    }
+
+    undo() {
+        this.setContent(this.history.undo());
+        this.update();
+    }
+
+    overrideKeyBinds() {
+        document.addEventListener('keydown', (event) => {
+            if (event.ctrlKey && event.key === 'z') {
+                event.preventDefault();
+                this.undo();
+            }
+
+            if (event.ctrlKey && event.key === 'y') {
+                event.preventDefault();
+                this.redo();
+            }
+
+            if (event.ctrlKey && event.key === 's') {
+                event.preventDefault();
+                this.saveCurrentContentToHistory(true);
+            }
+        });
+    }
+
+    update() {
+        this.updateSettings();
+        this.updateDropzones();
+        this.updateComponentList();
+    }
+
+    onClickRedo() {
+        return () => {
+            this.redo();
+        };
+    }
+
+    redo() {
+        this.setContent(this.history.redo());
+        this.update();
+    }
+
+    saveCurrentContentToHistory(passive = false) {
+        this.history.save(this.getContent().innerHTML, passive);
+    }
+
+    eventListenerSave() {
+        return () => {
+            this.saveCurrentContentToHistory();
+        };
+    }
+
     hideSubmissionWindow(hide) {
-        console.log(hide);
         if (hide) {
             this.getSubmissionWindow().classList.add('hidden');
         } else {
@@ -571,8 +650,8 @@ export class Editor {
         Toast.error("Could not get content. Exiting ..");
     }
 
-    setContent(content) {
-
+    setContent(innerHTML) {
+        this.getContent().innerHTML = innerHTML;
     }
 
     addComponent(component) {
@@ -599,17 +678,21 @@ export class Editor {
         if (parent) {
             parent.appendChild(generatedComponent);
             parent.dataset.parentId = id;
-            this.updateComponentList();
-            this.updateSettings();
+            this.update();
+            this.saveCurrentContentToHistory(true);
         } else {
             Toast.error("Could not get target or componentList for targetId " + parentId);
-            console.log("this one..");
         }
     }
 
     getAllComponents() {
         const content = this.getContent();
         return content ? content.querySelectorAll('[data-type]') : undefined;
+    }
+
+    updateDropzones() {
+        const components = this.getAllComponents();
+        components.forEach(c => this.setDropzone(c.id))
     }
 
     updateSettings() {
@@ -673,8 +756,8 @@ export class Editor {
 
             deleteButton.onclick = Components.onClickRemoveComponents(id);
             deleteButton.addEventListener('click', () => {
-                this.updateSettings();
-                this.updateComponentList();
+                this.update();
+                this.saveCurrentContentToHistory(true);
             })
 
             inner.appendChild(deleteButton);
@@ -692,21 +775,22 @@ export class Editor {
         Toast.error("Could not get component list. Exiting ..");
     }
 
-    removeComponent(targetId) {
-        const targetParent = document.getElementById(targetId)?.parentElement;
-        if (targetParent) {
-            Components.clearElement(targetParent);
-        } else {
-            Toast.error("Could not remove component with id " + targetId);
-        }
-    }
-
     clearSettings() {
         this.getSettings().innerHTML = '';
     }
 
     clearComponentList() {
         this.getComponentList().innerHTML = '';
+    }
+
+    setDropzone(id) {
+        const component = document.getElementById(id);
+        if (component) {
+            const {applyDropzone} = Components.getTemplateByPrefix(component.dataset.type);
+            if (applyDropzone) {
+                applyDropzone(component);
+            }
+        }
     }
 }
 
