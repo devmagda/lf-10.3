@@ -9,8 +9,7 @@ export const CONTAINER = {
         padding: "0px",
         margin: '0px',
     },
-    getContent: () => {
-        const id = Components.getUniqueId(CONTAINER);
+    getContent: (id) => {
         const div = Components.createDiv();
         div.id = id;
         div.ondragover = Components.onDragOver();
@@ -30,13 +29,12 @@ export const GRID = {
     style: "",
     isContainer: false,
     defaultStyling: {
-        width: "100%",  // Ensure grid fills the width of its container
-        height: "100%", // Ensure grid fills the height of its container
+        width: "100%",
+        height: "100%",
         border: "1px solid green",
         padding: "0px",
     },
-    getContent: () => {
-        const id = Components.getUniqueId(GRID);
+    getContent: (id) => {
         const table = document.createElement('table');
         table.id = id;
         table.dataset.rows = 2;
@@ -130,8 +128,7 @@ export const LIST = {
         listStyleType: "disc",
         padding: "10px"
     },
-    getContent: () => {
-        const id = Components.getUniqueId(LIST);
+    getContent: (id) => {
         const ul = document.createElement('ul');
         ul.id = id;
         const addItemLi = document.createElement('li');
@@ -141,12 +138,17 @@ export const LIST = {
         addItemLi.appendChild(addItemDiv);
         addItemDiv.textContent = "+";
         addItemDiv.onclick = (event) => {
-            const newId = Components.getUniqueId(LIST);
+            const innerId = Components.getUniqueId(LIST);
             const newLi = document.createElement('li');
+            const inner = document.createElement('div');
+            Components.addDefaultStyling(inner, CONTAINER.defaultStyling);
+            newLi.ondragover = Components.onDragOver();
+            newLi.ondrop = Components.onDrop(innerId);
+            inner.id = innerId;
+            inner.classList.add('editor-outline');
+            newLi.appendChild(inner);
             const lastChild = ul.lastElementChild;
-            newLi.id = newId;
             ul.insertBefore(newLi, lastChild);
-            Editor.getInstance().addComponent(newId, CONTAINER);
         };
         ul.style.listStyleType = 'disc';
         return ul;
@@ -227,16 +229,26 @@ export const IMAGE = {
 class Components {
     static #componentsMap = null;
 
+    static fromTemplate(componentTemplate, parentId) {
+        const newId = Components.getUniqueId(componentTemplate);
+
+        return {
+            ...componentTemplate,
+            id: newId,
+            parentId: parentId,
+        };
+    }
+
     static getComponentsMap() {
         if (!this.#componentsMap) {
             this.#componentsMap = new Map([
-                ["container", CONTAINER],
-                ["grid", GRID],
-                ["title", TITLE],
-                ["text", TEXT],
-                ["list", LIST],
-                ["link", LINK],
-                ["image", IMAGE]
+                [CONTAINER.prefix, CONTAINER],
+                [GRID.prefix, GRID],
+                [TITLE.prefix, TITLE],
+                [TEXT.prefix, TEXT],
+                [LIST.prefix, LIST],
+                [LINK.prefix, LINK],
+                [IMAGE.prefix, IMAGE]
             ]);
         }
         return this.#componentsMap;
@@ -246,11 +258,11 @@ class Components {
         return Array.from(this.getComponentsMap().values());
     }
 
-    static getComponentByPrefix(prefix) {
+    static getTemplateByPrefix(prefix) {
         return this.getComponentsMap().get(prefix);
     }
 
-    static getFromEvent(event) {
+    static getTemplateDataFromEvent(event) {
         // Retrieve the dropped JSON data
         const componentDataString = event.dataTransfer.getData('application/json');
 
@@ -310,7 +322,6 @@ class Components {
                 const td = document.createElement('td');
                 const id = Components.getUniqueId(GRID) + "_td";
                 const inner = document.createElement('div');
-                inner.dataset.type = CONTAINER.prefix;
                 Components.addDefaultStyling(inner, CONTAINER.defaultStyling);
                 inner.ondragover = Components.onDragOver();
                 inner.ondrop = Components.onDrop(id);
@@ -366,27 +377,30 @@ class Components {
         return () => {
             const components = Components.getElementsById(id);
             components.forEach(c => c.classList.add('editor-highlight'));
-            console.log('A');
         }
+    }
+
+    static clearHighlight() {
+        const components = document.getElementsByClassName('editor-highlight');
+        components.forEach(c => c.classList.remove('editor-highlight'));
     }
 
     static mouseLeaveHighlight(id) {
         return () => {
             const components = Components.getElementsById(id);
             components.forEach(c => c.classList.remove('editor-highlight'));
-            console.log('B');
         }
     }
 
-    static onDrop(id) {
+    static onDrop(parentId) {
         return (event) => {
             event.stopPropagation();
-            const componentTemplate = Components.getFromEvent(event);
+            const componentTemplate = Components.getTemplateDataFromEvent(event);
 
             if (componentTemplate) {
-                const component = Components.getComponentByPrefix(componentTemplate.prefix);
-                if (component) {
-                    Editor.getInstance().addComponent(id, component);
+                const template = Components.getTemplateByPrefix(componentTemplate.prefix);
+                if (template) {
+                    Editor.getInstance().addComponent(Components.fromTemplate(template, parentId));
                 }
             } else {
                 Toast.error("Could not create Component. Please see logs for details!");
@@ -494,8 +508,12 @@ export class Editor {
 
         this.componentList = [];
 
+
         Components.getComponents().forEach(c => this.addComponentTemplate(c));
-        this.addComponent('content', CONTAINER);
+
+        this.componentList.push(Components.fromTemplate(CONTAINER, 'content'));
+
+        this.addComponent(Components.fromTemplate(CONTAINER, 'content'));
         Editor.#instance = this; // Store the instance
     }
 
@@ -557,24 +575,47 @@ export class Editor {
 
     }
 
-    addComponent(targetId, component) {
-        const {title, description, prefix, style, isContainer, getSettingsForm, getContent, defaultStyling} = component;
-        const generatedComponent = getContent();
+    addComponent(component) {
+        const {
+            id,
+            parentId,
+            title,
+            description,
+            prefix,
+            style,
+            isContainer,
+            getSettingsForm,
+            getContent,
+            defaultStyling
+        } = component;
+        const generatedComponent = getContent(id);
         generatedComponent.dataset.type = component.prefix;
-        generatedComponent.id = generatedComponent.id ? generatedComponent.id : Components.getUniqueId(component);
+        generatedComponent.dataset.parentId = parentId;
+        generatedComponent.id = id ? id : Components.getUniqueId(component);
         Components.addDefaultStyling(generatedComponent, defaultStyling);
-        generatedComponent.onmouseenter = Components.mouseOverHighlight(generatedComponent.id);
-        generatedComponent.onmouseleave = Components.mouseLeaveHighlight(generatedComponent.id);
-        const target = document.getElementById(targetId);
-        if (target) {
-            target.appendChild(generatedComponent);
-            target.dataset.parentId = generatedComponent.id;
-            this.addComponentList(generatedComponent.id, component);
-            this.addSetting(generatedComponent, component);
+        generatedComponent.onmouseenter = Components.mouseOverHighlight(id);
+        generatedComponent.onmouseleave = Components.mouseLeaveHighlight(id);
+        const parent = document.getElementById(parentId);
+        if (parent) {
+            parent.appendChild(generatedComponent);
+            parent.dataset.parentId = id;
+            this.updateComponentList();
+            this.updateSettings();
         } else {
-            Toast.error("Could not get target or componentList for targetId " + targetId);
+            Toast.error("Could not get target or componentList for targetId " + parentId);
             console.log("this one..");
         }
+    }
+
+    getAllComponents() {
+        const content = this.getContent();
+        return content ? content.querySelectorAll('[data-type]') : undefined;
+    }
+
+    updateSettings() {
+        this.clearSettings();
+        const components = this.getAllComponents();
+        components.forEach(c => this.addSetting(c.id));
     }
 
     getSettings() {
@@ -583,14 +624,20 @@ export class Editor {
         Toast.error("Could not get settings. Exiting ..");
     }
 
-    addSetting(generatedComponent, component) {
-        const {title, description, prefix, style, isContainer, getSettingsForm, getContent} = component;
-        const li = document.createElement('li');
-        li.dataset.linkedId = generatedComponent.id;
-        li.appendChild(getSettingsForm(generatedComponent));
-        li.onmouseenter = Components.mouseOverHighlight(generatedComponent.id);
-        li.onmouseleave = Components.mouseLeaveHighlight(generatedComponent.id);
-        this.getSettings().appendChild(li);
+    addSetting(id) {
+        const component = document.getElementById(id);
+        if (component) {
+            const {getSettingsForm} = Components.getTemplateByPrefix(component.dataset.type);
+            const li = document.createElement('li');
+            li.dataset.linkedId = id;
+            li.appendChild(getSettingsForm(component));
+            li.onmouseenter = Components.mouseOverHighlight(id);
+            li.onmouseleave = Components.mouseLeaveHighlight(id);
+            const settings = this.getSettings();
+            settings.appendChild(li);
+        } else {
+            Toast.error('Could not add setting for component with id <' + id + '>: Could not get element. Exiting ..');
+        }
     }
 
     addComponentTemplate(component) {
@@ -606,22 +653,37 @@ export class Editor {
         this.getComponentTemplateList().appendChild(template);
     }
 
-    addComponentList(id, component) {
-        const {title} = component;
-        const {template, inner} = Components.createListItem(title, id);
-        inner.style.display = 'flex';
-        template.idLink = id;
-        const deleteButton = Components.createButton("x");
+    updateComponentList() {
+        this.clearComponentList();
+        const components = this.getAllComponents();
+        components.forEach(c => this.addComponentList(c.id));
+    }
 
+    addComponentList(id) {
+        const component = document.getElementById(id);
+        if (component) {
+            const {title} = Components.getTemplateByPrefix(component.dataset.type);
+            const {template, inner} = Components.createListItem(title, id);
+            inner.style.display = 'flex';
+            template.idLink = id;
+            const deleteButton = Components.createButton("x");
 
-        template.onmouseover = Components.mouseOverHighlight(id);
-        template.onmouseleave = Components.mouseLeaveHighlight(id);
+            template.onmouseover = Components.mouseOverHighlight(id);
+            template.onmouseleave = Components.mouseLeaveHighlight(id);
 
-        deleteButton.onclick = Components.onClickRemoveComponents(id);
+            deleteButton.onclick = Components.onClickRemoveComponents(id);
+            deleteButton.addEventListener('click', () => {
+                this.updateSettings();
+                this.updateComponentList();
+            })
 
-        inner.appendChild(deleteButton);
+            inner.appendChild(deleteButton);
 
-        this.getComponentList().appendChild(template);
+            this.getComponentList().appendChild(template);
+        } else {
+            Toast.error('There was an error trying to add the new component with id <' + id + '> to the list of components. Exiting ..');
+        }
+
     }
 
     getComponentList() {
@@ -637,6 +699,14 @@ export class Editor {
         } else {
             Toast.error("Could not remove component with id " + targetId);
         }
+    }
+
+    clearSettings() {
+        this.getSettings().innerHTML = '';
+    }
+
+    clearComponentList() {
+        this.getComponentList().innerHTML = '';
     }
 }
 
