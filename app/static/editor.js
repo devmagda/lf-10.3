@@ -6,9 +6,8 @@ export const CONTAINER = {
     isContainer: true,
     defaultStyling: {
         minHeight: '5vh',
-        minWidth: '5vw',
-        border: "1px solid gray",
-        padding: "10px"
+        padding: "0px",
+        margin: '0px',
     },
     getContent: () => {
         const id = Components.getUniqueId(CONTAINER);
@@ -34,7 +33,7 @@ export const GRID = {
         width: "100%",  // Ensure grid fills the width of its container
         height: "100%", // Ensure grid fills the height of its container
         border: "1px solid green",
-        padding: "10px",
+        padding: "0px",
     },
     getContent: () => {
         const id = Components.getUniqueId(GRID);
@@ -67,7 +66,6 @@ export const GRID = {
         return form;
     }
 };
-
 
 export const TITLE = {
     title: "Title",
@@ -317,6 +315,7 @@ class Components {
                 inner.ondragover = Components.onDragOver();
                 inner.ondrop = Components.onDrop(id);
                 inner.id = id;
+                inner.classList.add('editor-outline');
 
                 td.appendChild(inner);
 
@@ -350,7 +349,8 @@ class Components {
 
     static createDiv() {
         const div = document.createElement('div');
-        div.classList.add('component-container')
+        div.classList.add('component-container');
+        div.classList.add('editor-outline');
         //div.dataset.allowContainer = true; welp
         return div;
     }
@@ -359,6 +359,22 @@ class Components {
         return (event) => {
             event.preventDefault();
             event.stopPropagation();
+        }
+    }
+
+    static mouseOverHighlight(id) {
+        return () => {
+            const components = Components.getElementsById(id);
+            components.forEach(c => c.classList.add('editor-highlight'));
+            console.log('A');
+        }
+    }
+
+    static mouseLeaveHighlight(id) {
+        return () => {
+            const components = Components.getElementsById(id);
+            components.forEach(c => c.classList.remove('editor-highlight'));
+            console.log('B');
         }
     }
 
@@ -381,10 +397,19 @@ class Components {
 
     static onClickRemoveComponents(id) {
         return () => {
-            const deletionTargets = Components.getElementsById(id);
-            console.log('deletionTargets', deletionTargets);
-            deletionTargets.forEach(t => t.remove());
+            const component = document.getElementById(id);
+            const subComponents = component ? component.querySelectorAll('[data-type]') : undefined;
+            if (subComponents) {
+                subComponents.forEach(c => Components.deleteComponent(c.id));
+            }
+            Components.deleteComponent(id);
         }
+    }
+
+    static deleteComponent(id) {
+        const deletionTargets = Components.getElementsById(id);
+        console.log('deletionTargets', deletionTargets);
+        deletionTargets.forEach(t => t.remove());
     }
 
     static createButton(text) {
@@ -467,9 +492,10 @@ export class Editor {
             return Editor.#instance; // Return existing instance if already created
         }
 
+        this.componentList = [];
+
         Components.getComponents().forEach(c => this.addComponentTemplate(c));
         this.addComponent('content', CONTAINER);
-
         Editor.#instance = this; // Store the instance
     }
 
@@ -505,7 +531,7 @@ export class Editor {
         }
     }
 
-   onClickUpdateSubmitDescription(component) {
+    onClickUpdateSubmitDescription(component) {
         return () => {
             const content = this.getContent();
             component.innerText = this.getContent().innerHTML;
@@ -527,16 +553,22 @@ export class Editor {
         Toast.error("Could not get content. Exiting ..");
     }
 
+    setContent(content) {
+
+    }
+
     addComponent(targetId, component) {
-        console.log('adding component: ', targetId, component);
         const {title, description, prefix, style, isContainer, getSettingsForm, getContent, defaultStyling} = component;
         const generatedComponent = getContent();
         generatedComponent.dataset.type = component.prefix;
         generatedComponent.id = generatedComponent.id ? generatedComponent.id : Components.getUniqueId(component);
         Components.addDefaultStyling(generatedComponent, defaultStyling);
+        generatedComponent.onmouseenter = Components.mouseOverHighlight(generatedComponent.id);
+        generatedComponent.onmouseleave = Components.mouseLeaveHighlight(generatedComponent.id);
         const target = document.getElementById(targetId);
         if (target) {
             target.appendChild(generatedComponent);
+            target.dataset.parentId = generatedComponent.id;
             this.addComponentList(generatedComponent.id, component);
             this.addSetting(generatedComponent, component);
         } else {
@@ -556,6 +588,8 @@ export class Editor {
         const li = document.createElement('li');
         li.dataset.linkedId = generatedComponent.id;
         li.appendChild(getSettingsForm(generatedComponent));
+        li.onmouseenter = Components.mouseOverHighlight(generatedComponent.id);
+        li.onmouseleave = Components.mouseLeaveHighlight(generatedComponent.id);
         this.getSettings().appendChild(li);
     }
 
@@ -578,6 +612,10 @@ export class Editor {
         inner.style.display = 'flex';
         template.idLink = id;
         const deleteButton = Components.createButton("x");
+
+
+        template.onmouseover = Components.mouseOverHighlight(id);
+        template.onmouseleave = Components.mouseLeaveHighlight(id);
 
         deleteButton.onclick = Components.onClickRemoveComponents(id);
 

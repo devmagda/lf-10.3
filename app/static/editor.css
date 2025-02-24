@@ -3,6 +3,14 @@ div {
 
 }
 
+.editor-highlight {
+    border: 3px dotted rebeccapurple !important;
+}
+
+.editor-outline {
+    border: 2px dashed var(--secondary);;
+}
+
 .editor_container_fixed {
     height: 95vh;
     width: 100vw;
@@ -83,7 +91,6 @@ div {
 }
 
 .component-container {
-    border: 1px dashed #000;
     padding: 10px;
     min-height: 50px;
 }
