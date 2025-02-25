@@ -58,11 +58,13 @@ export const GRID = {
         const form = Components.createDefaultSettingsForm(component, GRID.title);
         const rowsInput = Components.createInput("Rows:", component.dataset.rows, "number", (val) => {
             component.dataset.rows = val;
-            Components.createGrid(component, parseInt(val), parseInt(component.dataset.cols));
+            Components.createGrid(component.id, component, parseInt(val), parseInt(component.dataset.cols));
+            Editor.getInstance().update();
         });
         const colsInput = Components.createInput("Columns:", component.dataset.cols, "number", (val) => {
             component.dataset.cols = val;
-            Components.createGrid(component, parseInt(component.dataset.rows), parseInt(val));
+            Components.createGrid(component.id, component, parseInt(component.dataset.rows), parseInt(val));
+            Editor.getInstance().update();
         });
         form.append(rowsInput, colsInput);
         return form;

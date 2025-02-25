@@ -53,7 +53,7 @@
 </div>
 
 <script type="module">
-    import {Editor, Toast} from "{{ url_for('static', filename='editor.js') }}";
+    import {Editor} from "{{ url_for('static', filename='editor.js') }}";
     const editor = new Editor();
     editor.overrideKeyBinds();
     const showSubmitButton = document.getElementById('show-submit');
