@@ -4,7 +4,7 @@ div {
 }
 
 .editor-highlight {
-    border: 3px dotted rebeccapurple;
+    border: 3px dotted rebeccapurple !important;
 
 }
 
