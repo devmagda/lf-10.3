@@ -124,28 +124,78 @@ INSERT INTO tbl_users (username, password, role_id) VALUES
 ;
 
 INSERT INTO tbl_events (owner, title_short, title, description) VALUES
-(1, 'Young Clean-Up', 'Urban Clean-Up for Youth',
-'Join us for an exciting Urban Clean-Up event specifically designed for young people in our city. This initiative aims to bring together teenagers and young adults to tackle litter in key areas. Not only will you help beautify the city, but you will also have the chance to meet new friends, learn about environmental sustainability, and contribute to a cleaner, greener urban space. This event includes educational workshops on waste management and recycling, making it both fun and informative. Refreshments and cleanup supplies will be provided. Come and be part of a positive change in our community!'
-),
+(1, 'Intro', '🎉 Präsentation: Event-Baukasten',
+'<div style="padding: 2em; background: #f0f8ff; border-radius: 16px; margin-bottom: 2em;">
+  <h2 style="font-size: 2em; color: #004080;">🎉 Präsentation: Event-Baukasten</h2>
+  <p>Heute schauen wir uns folgende Themen an:</p>
+  <ul style="line-height: 1.6; font-size: 1.1em;">
+    <li>📌 <strong>Abgrenzung</strong> – Was nicht umgesetzt wurde & warum</li>
+    <li>🚀 <strong>Zukunft</strong> – Nächste Schritte und Umbau des Projekts</li>
+    <li>🌐 <strong>Showcase</strong> – Die Event-Webseite live erleben</li>
+    <li>🧠 <strong>Code Deep Dive</strong> – Ein Blick unter die Haube</li>
+  </ul>
+</div>'),
 
-(1, 'City Tidy', 'Community Cleaning Project',
-'Get involved in our City Tidy project, a comprehensive cleaning effort targeting multiple city zones. This event is designed for all age groups and focuses on fostering a strong sense of community. We encourage families, groups, and individuals to participate in various cleaning activities such as litter pick-ups, graffiti removal, and park beautification. The day will include activities for kids, informational booths on environmental stewardship, and a community lunch to celebrate our efforts. Join us to make a significant impact on our city’s cleanliness and enjoy a day of teamwork and community spirit.'
-),
+(1, 'Umsetzung', '🚧 Projektfortschritt',
+'<div style="padding: 2em; background: #e6ffe6; border-radius: 16px; margin-bottom: 2em;">
+  <h2 style="font-size: 2em; color: #00733e;">🚧 Projektfortschritt</h2>
+  <p>Der Event-Baukasten wurde erfolgreich als eigenständiges Modul entwickelt. Highlights:</p>
+  <ul style="line-height: 1.6;">
+    <li>🔧 Visueller Editor mit Toolbar, Bausteinen & Live-Vorschau</li>
+    <li>🧱 Bausteine können einfach per Drag & Drop hinzugefügt werden</li>
+    <li>🕒 Undo/Redo durch einfache Änderungshistorie</li>
+    <li>📦 Wird später per Build in die Hauptseite integriert</li>
+  </ul>
+  <p style="margin-top: 1em;">Der Editor ist unabhängig vom Backend und nutzt eine bestehende API zum Speichern.</p>
+</div>'),
 
-(1, 'Grandma''s Green Initiative', 'Generations Clean-Up',
-'<p><strong>Grandma''s Green Initiative</strong> invites people of all ages to participate in an <em>intergenerational clean-up event</em> aimed at bridging gaps between generations. This unique event encourages families and community members of all ages to come together for a day of cleaning and environmental awareness. Activities include:</p><ul><li>Neighborhood clean-ups</li><li>Educational sessions on sustainable living</li><li>Interactive games for children and seniors</li></ul><p>The event will also feature a <em>storytelling session</em> with our community’s beloved elders sharing their experiences and wisdom. Enjoy a day filled with cooperation, learning, and making a positive impact on our environment.</p>'
-)
-;
+(1, 'Abgrenzung', '⚠️ Abgrenzung',
+'<div style="padding: 2em; background: #fffbe6; border-radius: 16px; margin-bottom: 2em;">
+  <h2 style="font-size: 2em; color: #aa8800;">⚠️ Abgrenzung</h2>
+  <ul style="line-height: 1.6;">
+    <li>❌ <strong>Kein Backend-Modul</strong> – Die nötige Abstraktion für Formularstrukturen hätte eine neue Klasse & DB-Anpassung erfordert</li>
+    <li>🧪 <strong>Keine Unit/Integration Tests</strong> – Das Projekt ist aktuell ein JS-Frontend, ohne direkte Anbindung an den Python-Teil</li>
+    <li>🖥️ <strong>Keine GUI-Tests</strong> – Zu aufwändig für das aktuelle Zeitfenster</li>
+  </ul>
+  <p>Die Fokussierung lag auf der Bedienbarkeit & UX des Editors.</p>
+</div>'),
 
--- Positive and funny comments for events
+(1, 'Zukunft', '🔮 Zukunft & Weiterentwicklung',
+'<div style="padding: 2em; background: #f5e6ff; border-radius: 16px;">
+  <h2 style="font-size: 2em; color: #800080;">🔮 Zukunft & Weiterentwicklung</h2>
+  <ul style="line-height: 1.6;">
+    <li>🧭 Umbau zu einem eigenständigen JS-Projekt mit NPM-Setup</li>
+    <li>🧪 Einbau von Tests (Unit, Integration) über moderne JS-Testframeworks</li>
+    <li>📦 Integration via Build-Prozess in die Hauptseite</li>
+    <li>🔗 Eventuelle Erweiterung für dynamische Daten aus dem Backend</li>
+  </ul>
+  <p style="margin-top: 1em;">Ziel: Der Baukasten wird zu einem wartbaren, testbaren und modularen Bestandteil der Plattform.</p>
+</div>');
+
+
+-- Witzige und thematisch passende Kommentare für Präsentations-Events
 INSERT INTO tbl_comments (event_id, owner, comment) VALUES
-(1, 4, 'Cleaning the planet one gum wrapper at a time! Let’s do this!'),
-(1, 5, 'My trash bag is already full, and I’m just getting started!'),
-(2, 6, 'Who knew saving the planet could be such a great arm workout?'),
-(2, 7, 'Picking up trash and picking up good vibes. This is awesome!'),
-(3, 4, 'Grandma says we’re making the Earth cleaner for her grandkids. That’s me!'),
-(3, 5, 'The planet called and said, “Thank you!” Let’s keep going!'),
-(1, 6, 'Trash doesn’t stand a chance with this crew. Go team clean!'),
-(2, 7, 'Every bottle we pick up is one less swimming lesson for a turtle. Let’s save them!'),
-(3, 5, 'I found a penny while cleaning up! Saving the planet *and* making a profit.'),
-(3, 4, 'I came for the cleaning but stayed for the good vibes. Let’s make the Earth shine!');
+-- Event 1: Was wird heute passieren?
+(1, 4, 'Ich bin nur wegen dem Deep Dive hier. Taucherbrille sitzt! 🏊‍♂️💻'),
+(1, 5, 'Wenn heute keine Roadmap kommt, bau ich mir selbst eine aus Post-its.'),
+(1, 6, 'Showcase? Mehr wie WOWcase! Zeigt her euren Code-Zauber ✨'),
+(1, 7, 'Ich hab meine “Abgrenzungs-Mütze” aufgesetzt. Bereit zum Grenzen ziehen!'),
+
+-- Event 2: Was ist bisher passiert?
+(2, 5, 'Ah, der Klassiker: 1 Datei, 1000 Funktionen. Das nenn ich legacy-friendly!'),
+(2, 6, 'Ich fühle mich wie Indiana Jones im alten Code-Dschungel. 🏺👨‍💻'),
+(2, 7, '“Was bisher geschah” ist mein Lieblingsgenre. Gleich nach “Bugfix RomComs”.'),
+(2, 4, 'Das Projekt ist wie ein Sandwich: chaotisch begonnen, aber lecker geworden.'),
+
+-- Event 3: Was nicht passiert ist
+(3, 6, 'Unit Tests? Sorry, die wurden von der Deadline überfahren. 🧪🚗💥'),
+(3, 7, '“Form-Abstraktion im Backend” klingt wie ein Bossfight, den wir geskippt haben.'),
+(3, 5, 'Integrationstests sind wie Socken – immer das Erste, was fehlt. 🧦'),
+(3, 4, 'GUI-Tests wurden archiviert im Ordner “vielleicht irgendwann™”.'),
+
+-- Event 4: Wie es weitergeht
+(4, 4, 'Neues Projekt, neue Hoffnung! Möge NPM mit dir sein. 🚀'),
+(4, 5, 'Von Flask zu JS? Das ist wie von Fahrrad auf Rakete umsteigen.'),
+(4, 6, 'Endlich Platz für Tests und Struktur. RIP monolithische Chaos-Datei.'),
+(4, 7, 'Ich erwarte mindestens 3 npm-Skripte und 2 Build Errors zum Start!');
+
