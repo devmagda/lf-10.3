@@ -148,7 +148,6 @@ div {
     top: 15vh;
     left: 15vw;
     width: 50vw;
-    background: gray;
 
     .create_event_form {
         background-color: var(--fourth, #f9f9f9);
