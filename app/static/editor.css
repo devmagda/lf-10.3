@@ -4,11 +4,12 @@ div {
 }
 
 .editor-highlight {
-    border: 3px dotted rebeccapurple !important;
+    border: 3px dotted rebeccapurple;
+
 }
 
 .editor-outline {
-    border: 2px dashed var(--secondary);;
+    border: 2px dashed var(--secondary);
 }
 
 .editor_container_fixed {
@@ -32,11 +33,25 @@ div {
     flex-direction: column;
     display: flex;
 
+    .toolbar-selection {
+
+    }
+
+    .toolbar-list {
+        flex: 1;
+    }
+
+    .toolbar-submit {
+        button {
+            width: 100%;
+        }
+    }
+
     .toolbar-components {
-        border: 1px solid black;
         overflow: scroll;
         overflow-x: hidden;
         overflow-y: auto;
+        border-bottom: 3px solid var(--secondary);
 
         ul.component-template-list {
             li {
@@ -52,7 +67,7 @@ div {
     }
 
     .toolbar-submit-button {
-        margin-top: auto;
+        background-color: var(--secondary);
     }
 }
 
@@ -62,7 +77,6 @@ div {
 
     #history-toolbar {
         height: 3vh;
-        border: 1px solid black;
         margin-bottom: 1vh;
         display: flex;
         justify-content: flex-end;
@@ -93,6 +107,35 @@ div {
     margin-right: 1vh;
     overflow-x: hidden;
     overflow-y: auto;
+
+    ul {
+        li {
+            border-bottom: 10px solid var(--secondary);
+            background-color: var(--fourth);
+
+            form {
+                padding: 0;
+                margin: 0 0 10px 0;
+
+                label {
+                    padding: 4px 4px 0 2px;
+                    border-bottom: 2px solid var(--secondary);
+                    margin: 0 !important;
+                    display: block;
+                }
+
+                textarea {
+                    padding: 0;
+                    margin: 0;
+                    background-color: var(--fourth);
+                }
+
+                input {
+                    background-color: var(--fourth);
+                }
+            }
+        }
+    }
 }
 
 .component-container {
@@ -106,4 +149,96 @@ div {
     left: 15vw;
     width: 50vw;
     background: gray;
+
+    .create_event_form {
+        background-color: var(--fourth, #f9f9f9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+
+        .create_event_sublines {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: var(--purple, #5E2B63);
+            font-weight: 600;
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+
+            label {
+                flex: 1 0 10%;
+                font-weight: 600;
+                color: var(--darkPurple, #3c1f40);
+                padding-right: 10px;
+                text-align: right;
+            }
+
+            input.create_event_input,
+            textarea.create_event_input {
+                flex: 1 0 60%;
+                padding: 0.6em 0.8em;
+                font-size: 1rem;
+                border: 1.5px solid var(--darkPurple, #3c1f40);
+                border-radius: 6px;
+                background-color: #fff;
+                color: #222;
+                transition: border-color 0.3s ease;
+                box-sizing: border-box;
+
+                &:focus {
+                    outline: none;
+                    border-color: var(--purple, #5E2B63);
+                    box-shadow: 0 0 5px var(--lightPurple, #B599C2);
+                }
+            }
+
+            textarea.create_event_textarea {
+                min-height: 100px;
+                resize: vertical;
+            }
+        }
+
+        input[type="hidden"].make_it_sparkle {
+            display: none;
+        }
+
+        button.submit_button {
+            margin-top: 1.5rem;
+            padding: 0.75em 1.2em;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        button.highlight_button {
+            background-color: var(--purple, #5E2B63);
+            color: white;
+            margin-bottom: 0.8rem;
+
+            &:hover {
+                background-color: var(--darkPurple, #3c1f40);
+            }
+        }
+
+        button#hide-submit {
+            background-color: #bbb;
+            color: #333;
+
+            &:hover {
+                background-color: #999;
+            }
+        }
+    }
+
+
 }

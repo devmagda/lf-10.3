@@ -1,20 +1,22 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='editor.css') }}">
-<script type="module" src="{{ url_for('static', filename='editor.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='toastify/toastify.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='toastify/toastify.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='toastify.override.css') }}">
 
 <div class="editor_container_fixed">
     <div class="editor_container rounded-single">
         <div class="editor_toolbar rounded dark_green_bg">
-            <div id="toolbar" class="toolbar-components">
+            <div id="toolbar" class="toolbar-components toolbar-selection">
                 <ul id="component-template-list" class="component-template-list unlisted">
                 </ul>
             </div>
 
-            <div class="toolbar-components">
+            <div class="toolbar-components toolbar-list">
                 <ul id="component-list" class="component-template-list unlisted">
                 </ul>
             </div>
-            <div class="toolbar-submit-button">
-                <button class="highlight_button submit_button pointercursor" id="show-submit">
+            <div class="toolbar-submit-button toolbar-submit">
+                <button class="highlight_button" id="show-submit">
                     Create Event
                 </button>
             </div>
@@ -38,19 +40,31 @@
 </div>
 
 <div class="editor-submit-event hidden" id="editor-submit-dialog">
-    <form action="/events/create" method="POST" class="create_event_form width_30_percent">
-        <h2 class="create_event_sublines">Here you customize your event:</h2>
-        <label for="title_short" class="credidentials">Short Title:</label><br>
-        <input type="text" id="title_short" name="title_short" class="create_event_input" required><br><br>
-        <label for="title" class="credidentials">Title:</label><br>
-        <input type="text" id="title" name="title" class="create_event_input" required><br><br>
-        <label for="description" class="credidentials">Description:</label><br>
-        <textarea id="description" name="description" class="create_event_input create_event_textarea"></textarea><br><br>
-        <input type="hidden" id="is_html" name="is_html" value="false" class="make_it_sparkle pointercursor">
-        <button type="submit" class="highlight_button submit_button pointercursor">Create Event</button>
-        <button class="submit_button pointercursor" id="hide-submit">Abort</button>
-    </form>
+  <form action="/events/create" method="POST" class="create_event_form">
+    <h2 class="create_event_sublines">Submit your event here or copy & edit the HTML elsewhere if you want!</h2>
+
+    <div class="form-row">
+      <label for="title_short">Short Title:</label>
+      <input type="text" id="title_short" name="title_short" class="create_event_input" required>
+    </div>
+
+    <div class="form-row">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" class="create_event_input" required>
+    </div>
+
+    <div class="form-row">
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" class="create_event_input create_event_textarea"></textarea>
+    </div>
+
+    <input type="hidden" id="is_html" name="is_html" value="false" class="make_it_sparkle pointercursor">
+
+    <button type="submit" class="highlight_button submit_button pointercursor">Create Event</button>
+    <button class="submit_button pointercursor" id="hide-submit">Abort</button>
+  </form>
 </div>
+
 
 <script type="module">
     import {Editor} from "{{ url_for('static', filename='editor.js') }}";

@@ -243,26 +243,53 @@ class Components {
 
     static createInput(labelText, value, type = "text", onChange = () => {
     }) {
+        const wrapper = document.createElement('div');
+        wrapper.style.display = 'flex';
+        wrapper.style.flexDirection = 'column';
+        wrapper.style.marginBottom = '12px';
+
         const label = document.createElement('label');
         label.textContent = labelText;
+        label.style.marginBottom = '4px';
+
         const input = document.createElement('input');
         input.type = type;
         input.value = value;
+        input.style.padding = '6px 8px';
+        input.style.fontSize = '14px';
+
         input.addEventListener('input', (e) => onChange(e.target.value));
-        label.appendChild(input);
-        return label;
+
+        wrapper.appendChild(label);
+        wrapper.appendChild(input);
+        return wrapper;
     }
 
     static createTextarea(labelText, value, onChange = () => {
     }) {
+        const wrapper = document.createElement('div');
+        wrapper.style.display = 'flex';
+        wrapper.style.flexDirection = 'column';
+        wrapper.style.marginBottom = '12px';
+
         const label = document.createElement('label');
         label.textContent = labelText;
+        label.style.marginBottom = '4px';
+
         const textarea = document.createElement('textarea');
         textarea.value = value;
+        textarea.style.padding = '6px 8px';
+        textarea.style.fontSize = '14px';
+        textarea.style.minHeight = '80px';
+        textarea.style.resize = 'vertical';
+
         textarea.addEventListener('input', (e) => onChange(e.target.value));
-        label.appendChild(textarea);
-        return label;
+
+        wrapper.appendChild(label);
+        wrapper.appendChild(textarea);
+        return wrapper;
     }
+
 
     static createCheckbox(labelText, checked, onChange = () => {
     }) {
@@ -413,7 +440,7 @@ class Components {
 
         // Create a label and textarea for multiline CSS input
         const label = document.createElement('label');
-        label.textContent = `Custom Styles (${title}):`;
+        label.textContent = `Styling: ${title}:`;
         label.style.display = 'block';
         label.style.marginBottom = '8px';
 
@@ -715,6 +742,7 @@ export class Editor {
             const {getSettingsForm} = Components.getTemplateByPrefix(component.dataset.type);
             const li = document.createElement('li');
             li.dataset.linkedId = id;
+            li.classList.add('settings-element');
             li.appendChild(getSettingsForm(component));
             li.onmouseenter = Components.mouseOverHighlight(id);
             li.onmouseleave = Components.mouseLeaveHighlight(id);
@@ -848,6 +876,5 @@ export class Toast {
         }).showToast();
     }
 }
-
 
 export default Editor;
